@@ -58,14 +58,14 @@ Brak przedmiotu
 (...)
 ```
 
-### Roadmap
+# Roadmap
  - Refactor code and add documentation
  - Add support for in images that can be translated (and game logo)
  - Add support for adjusting content size of in game UI to fit new text
  - Add `*.po` file (in addition to json for easier translations)
  - Create [Nexus](https://www.nexusmods.com/) page for DSP and upload mod there
 
-### Special Thanks to
+# Special Thanks to
 [BepInEx](https://github.com/BepInEx/BepInEx/releases) - for mod support
 
 Modified hard fork of [SimpleJSON](https://github.com/Bunny83/SimpleJSON) - for simple json parser
