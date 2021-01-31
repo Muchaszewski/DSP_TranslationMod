@@ -1,6 +1,6 @@
 # Dyson sphere translation plugin!
 
-[Licence: Project is under CC Attribution 4.0](../blob/main/LICENSE)
+[Licence: Project is under CC Attribution 4.0](../main/LICENSE)
 
 ## This is very work in progress - expect bugs and issues!
 
