@@ -9,6 +9,7 @@
 
 ## Installation
 1. Download and Install [BepInEx](https://github.com/BepInEx/BepInEx/releases)
+2. Download [mod files](https://github.com/Muchaszewski/DSP_TranslationMod/releases)
 2. Paste DLLs under `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin`
 3. Add translations to `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin\Translation` as a folder
 4. Select new translation in Menu of the Game
