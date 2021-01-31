@@ -56,6 +56,6 @@ Brak przedmiotu
 (...)
 ```
 
-###Special Thanks to
+### Special Thanks to
 [BepInEx](https://github.com/BepInEx/BepInEx/releases) - for mod support
 Modified hard fork of [SimpleJSON](https://github.com/Bunny83/SimpleJSON) - for simple json parser
