@@ -12,7 +12,9 @@
 
 ## How to add new translations
 1. Create folder under `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin\Translation` with the name of your translation eg: `Polish`
-![TranslationFolder](../blob/main/.readme/TranslationFolder.png "Logo Title Text 1")
+
+![TranslationFolder](../main/.readme/TranslationFolder.png "Translation Folder")
+
 2. Run game once - New file settings and translations files will be created.
 3. Translate
 
