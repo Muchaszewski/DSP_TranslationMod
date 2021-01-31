@@ -3,12 +3,18 @@
 [Licence: Project is under CC Attribution 4.0](../main/LICENSE)
 
 ## This is very work in progress - expect bugs and issues!
+### Features
+ - Adds possibility to add custom languages (text only)
+ - Adds (currently hidden) French lanugage
 
 ## Installation
 1. Download and Install [BepInEx](https://github.com/BepInEx/BepInEx/releases)
 2. Paste DLLs under `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin`
 3. Add translations to `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin\Translation` as a folder
-4. Enjoy
+4. Select new translation in Menu of the Game
+5. Enjoy
+
+![InGameTranslation](../main/.readme/InGameTranslation.png "In Game Translation")
 
 ## How to add new translations
 1. Create folder under `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin\Translation` with the name of your translation eg: `Polish`
