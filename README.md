@@ -1,22 +1,22 @@
-#Dyson sphere translation plugin!
+# Dyson sphere translation plugin!
 
 [Licence: Project is under CC Attribution 4.0](../blob/main/LICENSE)
 
-##This is very work in progress - expect bugs and issues!
+## This is very work in progress - expect bugs and issues!
 
-##Installation
+## Installation
 1. Download and Install [BepInEx](https://github.com/BepInEx/BepInEx/releases)
 2. Paste DLLs under `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin`
 3. Add translations to `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin\Translation` as a folder
 4. Enjoy
 
-##How to add new translations
+## How to add new translations
 1. Create folder under `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin\Translation` with the name of your translation eg: `Polish`
 ![TranslationFolder](../blob/main/.readme/TranslationFolder.png "Logo Title Text 1")
 2. Run game once - New file settings and translations files will be created.
 3. Translate
 
-###Translation file structure:
+### Translation file structure:
 ```
 {
   "TranslationTable": [
@@ -31,7 +31,7 @@
 }
 ```
 
-###Settings file structure:
+### Settings file structure:
 ```
 {
   "Version": "0.1.0.0",                             # Plugin version
@@ -41,11 +41,11 @@
 }
 ```
 
-###Dump file:
+### Dump file:
 Simpler file structure where only Translation value is provided.
 Each new translation is separated by 5 dashes `-----` this can speed up the translation process. 
 Can cause error if ever game decide to change IDs or will add new ones, with JSON format there should be no such issue.
-####IMPORTANT! Disable dump file import when sending for production!
+#### IMPORTANT! Disable dump file import when sending for production!
 ```
 Kliknij, aby zbudować
 -----
