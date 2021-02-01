@@ -20,7 +20,7 @@ alt="Patreon" width="100" /></a>
  - Add https://crowdl.io/ support
 
 ## Installation
-1. Download and Install [BepInEx](https://github.com/BepInEx/BepInEx/releases)
+1. Download and unpack [BepInEx](https://github.com/BepInEx/BepInEx/releases) into game root directory
 2. Download [mod files](https://github.com/Muchaszewski/DSP_TranslationMod/releases)
 3. Extract zip file
 4. Paste DLLs under `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin`
