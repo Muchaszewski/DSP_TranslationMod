@@ -1,5 +1,5 @@
 <a href="https://www.patreon.com/muchaszewski?fan_landing=true" 
-target="_blank">Support me on <img src="https://static.wikia.nocookie.net/logopedia/images/0/02/Patreon_2020.svg/revision/latest/scale-to-width-down/854?cb=20201030004907" 
+target="_blank">Support my work on <img src="https://static.wikia.nocookie.net/logopedia/images/0/02/Patreon_2020.svg/revision/latest/scale-to-width-down/854?cb=20201030004907" 
 alt="Patreon" width="100" /></a>
 # Dyson sphere translation plugin!
 
