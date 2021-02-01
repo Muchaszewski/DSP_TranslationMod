@@ -72,6 +72,7 @@ Brak przedmiotu
  - Add support for adjusting content size of in game UI to fit new text
  - Add `*.po` file (in addition to json for easier translations)
  - Create [Nexus](https://www.nexusmods.com/) page for DSP and upload mod there
+ - Add https://crowdl.io/ support
 
 # Special Thanks to
 [BepInEx](https://github.com/BepInEx/BepInEx/releases) - for mod support
