@@ -12,6 +12,8 @@ namespace TranslationCommon
         public const string TranslationFileName = "translation.json";
         [NonSerialized]
         public const string TranslationDumpFileName = "translation.dump.txt";
+        [NonSerialized] 
+        public const string TranslationCrowdinFileName = "translation_DysonSphereProgram.json";
         
         [SerializeField]
         public List<TranslationProto> TranslationTable;
@@ -56,6 +58,14 @@ namespace TranslationCommon
                         translationProto.IsValid = false;
                         missMatchList.Add(translationProto);
                         ConsoleLogger.LogWarning($"Translation for {translationProto.Original} -- {translationProto.Translation} is no longer valid! This entry original meaning has changed");
+                    }
+                    else
+                    {
+                        translationProto.Original = match.Original;
+                        if (translationProto.Original.StartsWith("UI"))
+                        {
+                            translationProto.Translation = match.Original;
+                        }
                     }
                 }
                 else

@@ -12,6 +12,8 @@ namespace TranslationCommon
         
         public string LanguageDisplayName;
 
+        public bool ImportFromLegacy;
+
         public bool CreateAndUpdateFromPlainTextDumpUnsafe;
 
         public string SettingsPath { get; set; }
@@ -19,7 +21,7 @@ namespace TranslationCommon
 
         public LanguageSettings()
         {
-            Version = "0.1.0.0";
+            Version = "0.1.0.1";
             GameVersion = GameConfig.gameVersion.ToFullString();
         }
     }

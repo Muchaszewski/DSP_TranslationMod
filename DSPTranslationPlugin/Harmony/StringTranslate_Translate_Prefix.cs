@@ -118,5 +118,21 @@ namespace DSPSimpleBuilding
                 }
             }
         }
+
+        [HarmonyPostfix]
+        public static void Postfix(UIOptionWindow __instance)
+        {            
+            UIComboBox comboBox = (UIComboBox)__instance.GetType().GetField("languageComp", BindingFlags.Instance | BindingFlags.NonPublic)
+                .GetValue(__instance);
+            if (TranslationManager.CurrentLanguage != null)
+            {
+                for (int i = 0; i < TranslationManager.Langauges.Count; i++)
+                {
+                    if (TranslationManager.CurrentLanguage.Settings.LanguageDisplayName ==
+                        TranslationManager.Langauges[i].Settings.LanguageDisplayName)
+                        comboBox.itemIndex = 3 + i;
+                }
+            }
+        }
     }
 }

@@ -17,16 +17,8 @@ namespace TranslationCommon
             where T : new()
         {
             var jsonNode = JSON.Parse(serializationStream);
-            var value = new T();
-            var fields = typeof(T).GetFields(BindingFlags.Instance | BindingFlags.Public);
-            var settings = new SimpleJSONParserSettings()
-            {
-            };
-            foreach (var fieldInfo in fields)
-            {
-                fieldInfo.SetValue(value, SimpleJSONStaticParser.FromJsonNode(jsonNode[fieldInfo.Name], fieldInfo.FieldType, settings));
-            }
-            return value;
+            var settings = new SimpleJSONParserSettings();
+            return (T)SimpleJSONStaticParser.FromJsonNode(jsonNode, typeof(T), settings);
         }
 
         public string Serialize(object graph, bool isIndented)

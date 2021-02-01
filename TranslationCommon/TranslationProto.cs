@@ -25,6 +25,16 @@ namespace TranslationCommon
             Original = proto.Original;
             Translation = translation;
         }
+
+        public static TranslationProto FromCrowdin(string name, string translation)
+        {
+            var split = name.Split('_');
+            TranslationProto result = new TranslationProto();
+            result.Name = split[0];
+            result.ID = int.Parse(split[1]);
+            result.Translation = translation;
+            return result;
+        }
         
         public TranslationProto(string name, int id, string original, string translation)
         {

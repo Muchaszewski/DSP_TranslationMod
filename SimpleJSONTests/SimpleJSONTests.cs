@@ -70,6 +70,21 @@ namespace SimpleJSONTests
             var test =  SimpleJSON.JSON.FromJson<UnityTypes>(result);
             test.Should().BeEquivalentTo(data);
         }
+        
+        [Test]
+        public void DictionaryTest()
+        {
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("Key1", "Value1");
+            data.Add("Key2", "Value2");
+            
+            var truth = JsonConvert.SerializeObject(data, Formatting.Indented);
+            Assert.AreEqual(truth, SimpleJSON.JSON.ToJson(data, true));
+            var jsonNet = JsonConvert.DeserializeObject<Dictionary<string, string>>(truth);
+            var test =  SimpleJSON.JSON.FromJson<Dictionary<string, string>>(truth);
+            jsonNet.Should().BeEquivalentTo(data);
+            test.Should().BeEquivalentTo(data);
+        }
     }
 
     public class UnityTypes
