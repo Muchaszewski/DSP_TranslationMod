@@ -24,7 +24,12 @@ alt="Patreon" width="100" /></a>
 2. Download [mod files](https://github.com/Muchaszewski/DSP_TranslationMod/releases)
 3. Extract zip file
 4. Paste DLLs under `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin`
-5. Add translations to `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin\Translation\{LanguageName}\translation_DysonSphereProgram.json` as a folder. You can find [translations at Crowdin](https://crowdin.com/translate/dyson-sphere-program)
+5. Add translations to 
+
+`Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin\Translation\{LanguageName}\translation_DysonSphereProgram.json`. 
+
+You can find [translations at Crowdin](https://crowdin.com/translate/dyson-sphere-program)
+
 6. Select new translation in Menu of the Game
 7. Enjoy
 (Note: Restart is not required for full effect ;) )
