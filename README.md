@@ -9,6 +9,15 @@ alt="Patreon" width="100" /></a>
 ### Features
  - Adds possibility to add custom languages (text only)
  - Adds (currently hidden) French lanugage
+ 
+ 
+# Roadmap
+ - Refactor code and add documentation
+ - Add support for in images that can be translated (and game logo)
+ - Add support for adjusting content size of in game UI to fit new text
+ - Add `*.po` file (in addition to json for easier translations)
+ - Create [Nexus](https://www.nexusmods.com/) page for DSP and upload mod there
+ - Add https://crowdl.io/ support
 
 ## Installation
 1. Download and Install [BepInEx](https://github.com/BepInEx/BepInEx/releases)
@@ -70,14 +79,6 @@ Brak przedmiotu
 -----
 (...)
 ```
-
-# Roadmap
- - Refactor code and add documentation
- - Add support for in images that can be translated (and game logo)
- - Add support for adjusting content size of in game UI to fit new text
- - Add `*.po` file (in addition to json for easier translations)
- - Create [Nexus](https://www.nexusmods.com/) page for DSP and upload mod there
- - Add https://crowdl.io/ support
 
 # Special Thanks to
 [BepInEx](https://github.com/BepInEx/BepInEx/releases) - for mod support
