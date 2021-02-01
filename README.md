@@ -38,6 +38,7 @@
       "Translation": "Kliknij, aby zbudować"    # Your translation here
     },
     (...)
+    ]
 }
 ```
 
