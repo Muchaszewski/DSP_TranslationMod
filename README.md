@@ -1,7 +1,6 @@
 <a href="https://www.patreon.com/muchaszewski?fan_landing=true" 
 target="_blank">Support me on <img src="https://static.wikia.nocookie.net/logopedia/images/0/02/Patreon_2020.svg/revision/latest/scale-to-width-down/854?cb=20201030004907" 
 alt="Patreon" width="100" /></a>
-![Patreon](https://www.pngfind.com/pngs/m/42-424697_patreon-com-circle-hd-png-download.png "Patreon")
 # Dyson sphere translation plugin!
 
 [Licence: Project is under CC Attribution 4.0](../main/LICENSE)
