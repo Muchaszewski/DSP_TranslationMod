@@ -59,7 +59,7 @@ namespace TranslationCommon
         /// <param name="template">Template for new language files</param>
         private void CrowdinDump(LanguageData template)
         {
-            Func<TranslationProto, string> key = proto => $"{proto.Name}_{proto.ID}";
+            Func<TranslationProto, string> key = proto => $"{proto.Name}";
             Func<TranslationProto, string> value = proto => proto.Translation;
             var translationCrowdinFilePath = Path.Combine(Settings.SettingsDirectory, LanguageData.TranslationCrowdinFileName);
             if (!File.Exists(translationCrowdinFilePath))
@@ -188,7 +188,7 @@ namespace TranslationCommon
             // Find invalid or missing translations
             foreach (var translationProto in tempTranslationTable)
             {
-                var match = template.TranslationTable.FirstOrDefault(proto => proto.ID == translationProto.ID);
+                var match = template.TranslationTable.FirstOrDefault(proto => proto.Name == translationProto.Name);
                 if (match != null)
                 {
                     if (match.Original != translationProto.Original)
@@ -216,7 +216,7 @@ namespace TranslationCommon
             // New translations
             foreach (var translationProto in template.TranslationTable)
             {
-                var match = targetFile.TranslationTable.FirstOrDefault(proto => proto.ID == translationProto.ID);
+                var match = targetFile.TranslationTable.FirstOrDefault(proto => proto.Name == translationProto.Name);
                 if (match == null)
                 {
                     missMatchList.Add(translationProto);

@@ -58,7 +58,6 @@ namespace TranslationCommon
                 translationProto.Original = translationDelegate(proto);
                 translationProto.Translation = translationDelegate(proto);
                 translationProto.Name = proto.Name;
-                translationProto.ID = proto.ID;
                 TranslationTable.Add(translationProto);
             }
         }

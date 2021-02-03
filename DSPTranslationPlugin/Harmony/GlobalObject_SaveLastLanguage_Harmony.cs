@@ -5,7 +5,7 @@ using UnityEngine;
 namespace DSPSimpleBuilding
 {
     [HarmonyPatch(typeof(GlobalObject), nameof(GlobalObject.SaveLastLanguage))]
-    public static class GlobalObject_SaveLastLanguage_Prefix
+    public static class GlobalObject_SaveLastLanguage_Harmony
     {
         [HarmonyPrefix]
         public static void Prefix()

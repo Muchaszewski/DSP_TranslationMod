@@ -4,7 +4,7 @@ using TranslationCommon;
 namespace DSPSimpleBuilding
 {
     [HarmonyPatch(typeof(GameOption), nameof(GameOption.Apply))]
-    public static class GameOption_Apply_Prefix
+    public static class GameOption_Apply_Harmony
     {
         [HarmonyPrefix]
         public static void Prefix()

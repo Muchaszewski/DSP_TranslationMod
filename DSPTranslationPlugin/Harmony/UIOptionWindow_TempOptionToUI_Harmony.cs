@@ -5,7 +5,7 @@ using TranslationCommon;
 namespace DSPSimpleBuilding
 {
     [HarmonyPatch(typeof(UIOptionWindow), "TempOptionToUI")]
-    public static class UIOptionWindow_TempOptionToUI_Prefix
+    public static class UIOptionWindow_TempOptionToUI_Harmony
     {
         [HarmonyPrefix]
         public static void Prefix(UIOptionWindow __instance)
