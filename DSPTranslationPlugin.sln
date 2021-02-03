@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSPTranslationPlugin", "DSP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslationCommon", "TranslationCommon\TranslationCommon.csproj", "{B89B56B6-D8B9-40E7-8D8B-B2501E138B5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleJSONTests", "SimpleJSONTests\SimpleJSONTests.csproj", "{BE42BC73-EBF6-475E-A0C9-A14DA2F228E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{BE42BC73-EBF6-475E-A0C9-A14DA2F228E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

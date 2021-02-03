@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 namespace TranslationCommon
@@ -18,16 +19,17 @@ namespace TranslationCommon
         [SerializeField]
         public List<TranslationProto> TranslationTable;
         
-        public LanguageData(ProtoSet<StringProto> stringProto)
+        public LanguageData(LanguageSettings settings, ProtoSet<StringProto> stringProto)
         {
             TranslationTable = new List<TranslationProto>(stringProto.Length);
+            var translationDelegate = GetOriginalTextDelegate<StringProto>(settings);
             for (var i = 0; i < stringProto.dataArray.Length; i++)
             {
                 var proto = stringProto.dataArray[i];
                 TranslationProto translationProto = new TranslationProto();
                 translationProto.IsValid = true;
-                translationProto.Original = proto.ENUS;
-                translationProto.Translation = proto.ENUS;
+                translationProto.Original = translationDelegate(proto);
+                translationProto.Translation = translationDelegate(proto);
                 translationProto.Name = proto.Name;
                 translationProto.ID = proto.ID;
                 TranslationTable.Add(translationProto);
@@ -89,6 +91,18 @@ namespace TranslationCommon
 
             TranslationTable = tempTranslationTable;
             settings.GameVersion = GameConfig.gameVersion.ToFullString();
+        }
+        
+        public static Func<T, string> GetOriginalTextDelegate<T>(LanguageSettings settings)
+        {
+            var fieldInfo = typeof(T).GetField(settings.OriginalLanguage, BindingFlags.Public | BindingFlags.Instance);
+            if (fieldInfo == null)
+            {
+                throw new ArgumentException($"LanguageSettings has incorrect original translation value -- used {settings.OriginalLanguage} but it do not exists");
+            }
+
+            var d = new Func<T, string>(arg => (string)fieldInfo.GetValue(arg));
+            return param => d(param);
         }
     }
 }

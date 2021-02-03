@@ -77,11 +77,11 @@ namespace TranslationCommon
             if (!IsInitialized)
             {
                 var stringProtoSet = LDB.strings;
-                var templateLanguageData = new LanguageData(stringProtoSet);
                 foreach (var languageContainer in Langauges)
                 {
                     if (languageContainer.Translation == null)
                     {
+                        var templateLanguageData = new LanguageData(languageContainer.Settings, stringProtoSet);
                         languageContainer.LoadTranslation(templateLanguageData);
                     }
                 }

@@ -30,9 +30,9 @@ namespace DSPSimpleBuilding
         public static void Postfix(VFPreload __instance)
         {
             var stringProtoSet = LDB.strings;
-            var templateLanguageData = new LanguageData(stringProtoSet);
             foreach (var languageContainer in TranslationManager.Langauges)
             {
+                var templateLanguageData = new LanguageData(languageContainer.Settings, stringProtoSet);
                 languageContainer.LoadTranslation(templateLanguageData);
             }
         }

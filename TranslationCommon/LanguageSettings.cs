@@ -9,7 +9,8 @@ namespace TranslationCommon
     {
         public string Version;
         public string GameVersion;
-        
+        public string OriginalLanguage;
+
         public string LanguageDisplayName;
 
         public bool ImportFromLegacy;
@@ -23,6 +24,7 @@ namespace TranslationCommon
         {
             Version = "0.1.0.1";
             GameVersion = GameConfig.gameVersion.ToFullString();
+            OriginalLanguage = "ENUS";
         }
     }
 }
