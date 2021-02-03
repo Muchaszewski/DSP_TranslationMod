@@ -65,7 +65,9 @@ You can find [translations at Crowdin](https://crowdin.com/translate/dyson-spher
 {
   "Version": "0.1.0.0",                             # Plugin version
   "GameVersion": "0.6.15.5678",                     # Game version
+  "OriginalLanguage": "ENUS",                       # Language in which empty new translation files will be generated, possible values: "ENUS", "FRFR", "ZHCN"
   "LanguageDisplayName": "Polish",                  # Language display name in the game
+  "ImportFromLegacy": false,                        # Generate Legacy json format (defualt is Crowdin format)
   "CreateAndUpdateFromPlainTextDumpUnsafe": true    # Should create and import dump file (more below)
 }
 ```
