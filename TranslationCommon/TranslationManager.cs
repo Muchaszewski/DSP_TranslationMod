@@ -167,6 +167,7 @@ namespace TranslationCommon
             else
             {
                 settings = JSON.FromJson<LanguageSettings>(File.ReadAllText(translationMain));
+                settings.VersionUpdate();
                 // Overwrite file with potential new settings
                 File.WriteAllText(Path.Combine(directory, SettingsJsonFileName), JSON.ToJson(settings, true));
             }

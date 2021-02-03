@@ -6,19 +6,46 @@ using UnityEngine;
 
 namespace TranslationCommon
 {
+    /// <summary>
+    ///     Container for language translation data
+    /// </summary>
     [Serializable]
     public class LanguageData
     {
+        /// <summary>
+        ///     File name of legacy format
+        /// </summary>
         [NonSerialized]
         public const string TranslationFileName = "translation.json";
+        /// <summary>
+        ///     File name of plain text format
+        /// </summary>
         [NonSerialized]
         public const string TranslationDumpFileName = "translation.dump.txt";
+        /// <summary>
+        ///     File name of crowdin format
+        /// </summary>
         [NonSerialized] 
         public const string TranslationCrowdinFileName = "translation_DysonSphereProgram.json";
         
+        /// <summary>
+        ///     Translation table - used for loading
+        /// </summary>
         [SerializeField]
         public List<TranslationProto> TranslationTable;
         
+        /// <summary>
+        ///     Default empty constructor
+        /// </summary>
+        public LanguageData()
+        {
+        }
+        
+        /// <summary>
+        ///     Copy constructor to generate new Language data from in Game Data
+        /// </summary>
+        /// <param name="settings">Settings</param>
+        /// <param name="stringProto">In game translations</param>
         public LanguageData(LanguageSettings settings, ProtoSet<StringProto> stringProto)
         {
             TranslationTable = new List<TranslationProto>(stringProto.Length);
@@ -36,63 +63,13 @@ namespace TranslationCommon
             }
         }
 
-        public LanguageData()
-        {
-        }
-        
-        public LanguageData(LanguageSettings settings, LanguageData template)
-        {
-            UpdateTranslationItems(settings, template);
-        }
-
-        public void UpdateTranslationItems(LanguageSettings settings, LanguageData template)
-        {
-            var missMatchList = new List<TranslationProto>();
-            var tempTranslationTable = TranslationTable.ToList();
-            // Find invalid or missing translations
-            foreach (var translationProto in tempTranslationTable)
-            {
-                var match = template.TranslationTable.FirstOrDefault(proto => proto.ID == translationProto.ID);
-                if (match != null)
-                {
-                    if (match.Original != translationProto.Original)
-                    {
-                        translationProto.IsValid = false;
-                        missMatchList.Add(translationProto);
-                        ConsoleLogger.LogWarning($"Translation for {translationProto.Original} -- {translationProto.Translation} is no longer valid! This entry original meaning has changed");
-                    }
-                    else
-                    {
-                        translationProto.Original = match.Original;
-                        if (translationProto.Original.StartsWith("UI"))
-                        {
-                            translationProto.Translation = match.Original;
-                        }
-                    }
-                }
-                else
-                {
-                    translationProto.IsValid = false;
-                    missMatchList.Add(translationProto);
-                    ConsoleLogger.LogWarning($"Translation for {translationProto.Original} -- {translationProto.Translation} is no longer valid! This entry was probably removed");
-                }
-            }
-            // New translations
-            foreach (var translationProto in template.TranslationTable)
-            {
-                var match = TranslationTable.FirstOrDefault(proto => proto.ID == translationProto.ID);
-                if (match == null)
-                {
-                    missMatchList.Add(translationProto);
-                    tempTranslationTable.Add(translationProto);
-                    ConsoleLogger.LogWarning($"New translation entry for {translationProto.Original}  (Upgrade from {settings.GameVersion} to {GameConfig.gameVersion.ToFullString()})");
-                }
-            }
-
-            TranslationTable = tempTranslationTable;
-            settings.GameVersion = GameConfig.gameVersion.ToFullString();
-        }
-        
+        /// <summary>
+        ///     Delegate constructor for getting field value from original translation
+        /// </summary>
+        /// <param name="settings">Language settings</param>
+        /// <typeparam name="T">Type of data</typeparam>
+        /// <returns>Resulting delegate to get string from</returns>
+        /// <exception cref="ArgumentException">Throws exception if given field info was not found in assmebly</exception>
         public static Func<T, string> GetOriginalTextDelegate<T>(LanguageSettings settings)
         {
             var fieldInfo = typeof(T).GetField(settings.OriginalLanguage, BindingFlags.Public | BindingFlags.Instance);

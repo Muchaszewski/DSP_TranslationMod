@@ -10,16 +10,34 @@ using UnityEngine;
 
 namespace TranslationCommon
 {
+    /// <summary>
+    ///     Container for single language methods
+    /// </summary>
     public class LanguageContainer
     {
+        /// <summary>
+        ///     Settings of the language
+        /// </summary>
         public LanguageSettings Settings;
+        
+        /// <summary>
+        ///     Translation data
+        /// </summary>
         public LanguageData Translation;
 
+        /// <summary>
+        ///     Constructor of the container with settings alread loaded into memory
+        /// </summary>
+        /// <param name="settings"></param>
         public LanguageContainer(LanguageSettings settings)
         {
             Settings = settings;
         }
 
+        /// <summary>
+        ///     Load translation data using template Language data
+        /// </summary>
+        /// <param name="template"></param>
         public void LoadTranslation(LanguageData template)
         {
             var translationFilePath = Path.Combine(Settings.SettingsDirectory, LanguageData.TranslationFileName);
@@ -35,6 +53,10 @@ namespace TranslationCommon
             }
         }
 
+        /// <summary>
+        ///     Load and/or Dump Crowdin format translation
+        /// </summary>
+        /// <param name="template">Template for new language files</param>
         private void CrowdinDump(LanguageData template)
         {
             Func<TranslationProto, string> key = proto => $"{proto.Name}_{proto.ID}";
@@ -71,6 +93,11 @@ namespace TranslationCommon
             }
         }
 
+        /// <summary>
+        ///     Load and/or Dump Legacy format translation
+        /// </summary>
+        /// <param name="template">Template for new language files</param>
+        /// <param name="translationFilePath">Translation file path</param>
         private void LegacyDump(LanguageData template, string translationFilePath)
         {
             if (!File.Exists(translationFilePath))
@@ -80,12 +107,17 @@ namespace TranslationCommon
             else
             {
                 Translation = JSON.FromJson<LanguageData>(File.ReadAllText(translationFilePath));
-                Translation.UpdateTranslationItems(Settings, template);
+                UpdateTranslationItems(Settings, Translation, template);
                 // overwrite if new translation show up
                 File.WriteAllText(translationFilePath, JSON.ToJson(Translation));
             }
         }
-
+        
+        /// <summary>
+        ///     Load and/or Dump Plain text format translation
+        /// </summary>
+        /// <param name="template">Template for new language files</param>
+        /// <param name="translationFilePath">Translation file path</param>
         private void PlainTextDump(LanguageData template, string translationFilePath)
         {
             if (Settings.CreateAndUpdateFromPlainTextDumpUnsafe)
@@ -118,6 +150,13 @@ namespace TranslationCommon
             }
         }
 
+        /// <summary>
+        ///     Converts list of translation to Dictionary for Crowdin support
+        /// </summary>
+        /// <param name="translationProto">Translation list to convert</param>
+        /// <param name="key">Key Expression</param>
+        /// <param name="value">Value Expression</param>
+        /// <returns></returns>
         private Dictionary<string, string> ToCrowdinDictionary(List<TranslationProto> translationProto, Func<TranslationProto, string> key, Func<TranslationProto, string> value)
         {
             var dict = new Dictionary<string, string>();
@@ -134,6 +173,60 @@ namespace TranslationCommon
             }
 
             return dict;
+        }
+        
+        /// <summary>
+        ///     Updates target file with new template data using settings
+        /// </summary>
+        /// <param name="settings">Settings</param>
+        /// <param name="targetFile">Target file</param>
+        /// <param name="template">Template file</param>
+        public void UpdateTranslationItems(LanguageSettings settings, LanguageData targetFile, LanguageData template)
+        {
+            var missMatchList = new List<TranslationProto>();
+            var tempTranslationTable = targetFile.TranslationTable.ToList();
+            // Find invalid or missing translations
+            foreach (var translationProto in tempTranslationTable)
+            {
+                var match = template.TranslationTable.FirstOrDefault(proto => proto.ID == translationProto.ID);
+                if (match != null)
+                {
+                    if (match.Original != translationProto.Original)
+                    {
+                        translationProto.IsValid = false;
+                        missMatchList.Add(translationProto);
+                        ConsoleLogger.LogWarning($"Translation for {translationProto.Original} -- {translationProto.Translation} is no longer valid! This entry original meaning has changed");
+                    }
+                    else
+                    {
+                        translationProto.Original = match.Original;
+                        if (translationProto.Original.StartsWith("UI"))
+                        {
+                            translationProto.Translation = match.Original;
+                        }
+                    }
+                }
+                else
+                {
+                    translationProto.IsValid = false;
+                    missMatchList.Add(translationProto);
+                    ConsoleLogger.LogWarning($"Translation for {translationProto.Original} -- {translationProto.Translation} is no longer valid! This entry was probably removed");
+                }
+            }
+            // New translations
+            foreach (var translationProto in template.TranslationTable)
+            {
+                var match = targetFile.TranslationTable.FirstOrDefault(proto => proto.ID == translationProto.ID);
+                if (match == null)
+                {
+                    missMatchList.Add(translationProto);
+                    tempTranslationTable.Add(translationProto);
+                    ConsoleLogger.LogWarning($"New translation entry for {translationProto.Original}  (Upgrade from {settings.GameVersion} to {GameConfig.gameVersion.ToFullString()})");
+                }
+            }
+
+            targetFile.TranslationTable = tempTranslationTable;
+            settings.GameVersion = GameConfig.gameVersion.ToFullString();
         }
     }
 }

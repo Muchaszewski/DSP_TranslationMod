@@ -2,6 +2,9 @@
 
 namespace TranslationCommon
 {
+    /// <summary>
+    ///     Console logger to output to BepInEx console
+    /// </summary>
     public static class ConsoleLogger
     {
         public static readonly ManualLogSource LogSource;
