@@ -46,7 +46,17 @@ You can find [translations at Crowdin](https://crowdin.com/translate/dyson-spher
 
 ### Translation file structure:
 ```
-{
+{ #CROWDIN
+  "点击鼠标建造_1": "Click to build",
+  "无法在此建造_2": "Cannot build here",
+  "{NAME}_{ID}: "{TRANSLATION}",
+  (...)
+}
+```
+
+
+```
+{ #LEGACY
   "TranslationTable": [
     {
       "IsValid": true,                          # Does translation exists in the game
