@@ -1,9 +1,10 @@
 <a href="https://www.patreon.com/muchaszewski?fan_landing=true" 
-target="_blank">Support my work on <img src="https://static.wikia.nocookie.net/logopedia/images/0/02/Patreon_2020.svg/revision/latest/scale-to-width-down/854?cb=20201030004907" 
+target="_blank"><img src="" 
 alt="Patreon" width="100" /></a>
+[Support my work on Patreon](https://www.patreon.com/muchaszewski?fan_landing=true)
 # Dyson sphere translation plugin!
 
-[Licence: Project is under CC Attribution 4.0](../main/LICENSE)
+[Licence: Project is under CC Attribution 4.0](https://raw.githubusercontent.com/Muchaszewski/DSP_TranslationMod/main/LICENSE)
 
 ## This is very work in progress - expect bugs and issues!
 ### Features
