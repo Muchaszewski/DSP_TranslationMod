@@ -1,6 +1,3 @@
-<a href="https://www.patreon.com/muchaszewski?fan_landing=true" 
-target="_blank"><img src="" 
-alt="Patreon" width="100" /></a>
 [Support my work on Patreon](https://www.patreon.com/muchaszewski?fan_landing=true)
 # Dyson sphere translation plugin!
 
