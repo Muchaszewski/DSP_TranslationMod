@@ -34,12 +34,12 @@ You can find [translations at Crowdin](https://crowdin.com/translate/dyson-spher
 7. Enjoy
 (Note: Restart is not required for full effect ;) )
 
-![InGameTranslation](../main/.readme/InGameTranslation.png "In Game Translation")
+![InGameTranslation](https://github.com/Muchaszewski/DSP_TranslationMod/tree/main/.readme/InGameTranslation.png "In Game Translation")
 
 ## How to add new translations
 1. Create folder under `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin\Translation` with the name of your translation eg: `Polish`
 
-![TranslationFolder](../main/.readme/TranslationFolder.png "Translation Folder")
+![TranslationFolder](https://github.com/Muchaszewski/DSP_TranslationMod/tree/main/.readme/TranslationFolder.png "Translation Folder")
 
 2. Run game once - New file settings and translations files will be created.
 3. Translate
