@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace TranslationCommon
+namespace TranslationCommon.Translation
 {
     /// <summary>
     ///     Settings file

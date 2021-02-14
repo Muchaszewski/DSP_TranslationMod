@@ -1,10 +1,16 @@
 ﻿using System.IO;
+using System.Reflection;
 
 namespace TranslationCommon
 {
     public static class Utils
     {
-        public const string PluginName = "DSPTranslationPlugin";
-        public static string PluginPath = Path.Combine(BepInEx.Paths.PluginPath, PluginName); /*BepInEx.Paths.PluginPath*/
+        private static readonly string AssemblyLocation = Assembly.GetCallingAssembly().Location;
+
+        public static string PluginFolderName = Path.GetDirectoryName(AssemblyLocation);
+        /// <summary>
+        ///  Plugin path
+        /// </summary>
+        public static string PluginPath = Path.GetDirectoryName(AssemblyLocation);
     }
 }

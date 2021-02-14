@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using SimpleJSON;
+using TranslationCommon.SimpleJSON;
 using UnityEngine;
 
-namespace TranslationCommon
+namespace TranslationCommon.Translation
 {
     public static class TranslationManager
     {

@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
-using SimpleJSON;
-using UnityEngine;
+using TranslationCommon.SimpleJSON;
 
-namespace TranslationCommon
+namespace TranslationCommon.Translation
 {
     /// <summary>
     ///     Container for single language methods

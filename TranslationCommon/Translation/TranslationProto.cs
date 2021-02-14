@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TranslationCommon
+namespace TranslationCommon.Translation
 {
     [Serializable]
     public class TranslationProto

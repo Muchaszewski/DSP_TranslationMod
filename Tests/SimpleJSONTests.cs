@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
 using System.Text;
 using FluentAssertions;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using TranslationCommon;
+using TranslationCommon.SimpleJSON;
+using TranslationCommon.Translation;
 using UnityEngine;
 using Random = System.Random;
 
@@ -32,8 +35,8 @@ namespace SimpleJSONTests
             }
 
             var truth = JsonConvert.SerializeObject(data, Formatting.Indented);
-            Assert.AreEqual(truth, SimpleJSON.JSON.ToJson(data, true));
-            var test =  SimpleJSON.JSON.FromJson<LanguageData>(truth);
+            Assert.AreEqual(truth, JSON.ToJson(data, true));
+            var test =  JSON.FromJson<LanguageData>(truth);
             test.Should().BeEquivalentTo(data);
         }
         
@@ -43,9 +46,9 @@ namespace SimpleJSONTests
             ComplexDataTypes data = ComplexDataTypes.GenerateRandomValues(null, false);
 
             var truth = JsonConvert.SerializeObject(data, Formatting.Indented);
-            Assert.AreEqual(truth, SimpleJSON.JSON.ToJson(data, true));
+            Assert.AreEqual(truth, JSON.ToJson(data, true));
             var jsonNet = JsonConvert.DeserializeObject<ComplexDataTypes>(truth);
-            var test =  SimpleJSON.JSON.FromJson<ComplexDataTypes>(truth);
+            var test =  JSON.FromJson<ComplexDataTypes>(truth);
             jsonNet.Should().BeEquivalentTo(data);
             test.Should().BeEquivalentTo(data);
         }
@@ -56,8 +59,8 @@ namespace SimpleJSONTests
             ComplexDataTypes data = ComplexDataTypes.GenerateRandomValues(null, false);
 
             var truth = JsonConvert.SerializeObject(data, Formatting.None);
-            Assert.AreEqual(truth, SimpleJSON.JSON.ToJson(data, false));
-            var test =  SimpleJSON.JSON.FromJson<ComplexDataTypes>(truth);
+            Assert.AreEqual(truth, JSON.ToJson(data, false));
+            var test =  JSON.FromJson<ComplexDataTypes>(truth);
             test.Should().BeEquivalentTo(data);
         }
         
@@ -66,8 +69,8 @@ namespace SimpleJSONTests
         {
             UnityTypes data = UnityTypes.GenerateRandomValues();
 
-            var result = SimpleJSON.JSON.ToJson(data, true);
-            var test =  SimpleJSON.JSON.FromJson<UnityTypes>(result);
+            var result = JSON.ToJson(data, true);
+            var test =  JSON.FromJson<UnityTypes>(result);
             test.Should().BeEquivalentTo(data);
         }
         
@@ -79,9 +82,9 @@ namespace SimpleJSONTests
             data.Add("Key2", "Value2");
             
             var truth = JsonConvert.SerializeObject(data, Formatting.Indented);
-            Assert.AreEqual(truth, SimpleJSON.JSON.ToJson(data, true));
+            Assert.AreEqual(truth, JSON.ToJson(data, true));
             var jsonNet = JsonConvert.DeserializeObject<Dictionary<string, string>>(truth);
-            var test =  SimpleJSON.JSON.FromJson<Dictionary<string, string>>(truth);
+            var test =  JSON.FromJson<Dictionary<string, string>>(truth);
             jsonNet.Should().BeEquivalentTo(data);
             test.Should().BeEquivalentTo(data);
         }

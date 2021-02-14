@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace TranslationCommon
+namespace TranslationCommon.Translation
 {
     /// <summary>
     ///     Container for language translation data

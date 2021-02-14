@@ -1,13 +1,16 @@
 ﻿using System;
 using HarmonyLib;
-using TranslationCommon;
+using TranslationCommon.Translation;
 using UnityEngine;
 
-namespace DSPSimpleBuilding
+namespace DSPTranslationPlugin.GameHarmony
 {
     [HarmonyPatch(typeof(GlobalObject), "Initialize")]
     public static class GlobalObject_Initialize_Harmony
     {
+        /// <summary>
+        ///     Try settings previously saved language
+        /// </summary>
         [HarmonyPrefix]
         public static void Prefix()
         {

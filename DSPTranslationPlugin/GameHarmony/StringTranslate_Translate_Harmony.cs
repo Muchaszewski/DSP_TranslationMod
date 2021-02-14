@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using HarmonyLib;
-using TranslationCommon;
+using TranslationCommon.Translation;
 
-namespace DSPSimpleBuilding
+namespace DSPTranslationPlugin.GameHarmony
 {
     [HarmonyPatch(typeof(StringTranslate), nameof(StringTranslate.Translate), typeof(string))]
     public static class StringTranslate_Translate_Harmony

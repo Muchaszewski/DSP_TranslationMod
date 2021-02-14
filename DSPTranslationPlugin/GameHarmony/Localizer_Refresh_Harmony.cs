@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace DSPSimpleBuilding
+namespace DSPTranslationPlugin.GameHarmony
 {
     /// <summary>
     ///     Localizer postfix for expanding translation box to match new credits text

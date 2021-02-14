@@ -3,10 +3,10 @@
 
 [Licence: Project is under CC Attribution 4.0](https://raw.githubusercontent.com/Muchaszewski/DSP_TranslationMod/main/LICENSE)
 
-## This is very work in progress - expect bugs and issues!
 ### Features
  - Adds possibility to add custom languages (text only)
- - Adds (currently hidden) French lanugage
+ - Adds (currently hidden) French language
+ - Adds the possibility to change Font in game (WORK IN PROGRESS)
  
  
 # Roadmap
@@ -14,18 +14,26 @@
  - Add support for in images that can be translated (and game logo)
  - Add support for adjusting content size of in game UI to fit new text
  - Add `*.po` file (in addition to json for easier translations)
- - Create [Nexus](https://www.nexusmods.com/) page for DSP and upload mod there
- - Add https://crowdl.io/ support
 
-## Installation
+## Installation via Mod manager 
+
+[Download mod manager](https://dsp.thunderstore.io/package/ebkr/r2modman_dsp/)
+
+1. Press Install with Mod Manager at https://dsp.thunderstore.io/package/Muchaszewski/DSPTranslationPlugin/
+2. Add translations to
+   `{Mods Directory}\Muchaszewski-DSPTranslationPlugin\Translation\{LanguageName}\translation_DysonSphereProgram.json`.
+   You can find [translations at Crowdin](https://crowdin.com/translate/dyson-sphere-program)
+6. Select new translation in Menu of the Game
+7. Enjoy
+   (Note: Restart is not required for full effect ;) )
+   
+## Installation Manual
 1. Download and unpack [BepInEx](https://github.com/BepInEx/BepInEx/releases) into game root directory
 2. Download [mod files](https://github.com/Muchaszewski/DSP_TranslationMod/releases)
 3. Extract zip file
 4. Paste DLLs under `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin`
-5. Add translations to 
-
-`Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin\Translation\{LanguageName}\translation_DysonSphereProgram.json`. 
-
+5. Add translations to
+`Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin\Translation\{LanguageName}\translation_DysonSphereProgram.json`.
 You can find [translations at Crowdin](https://crowdin.com/translate/dyson-sphere-program)
 
 6. Select new translation in Menu of the Game

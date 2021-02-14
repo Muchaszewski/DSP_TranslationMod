@@ -38,12 +38,11 @@
 
 #endregion License and information
 
-using System;
+using System.Collections.Generic;
+using System.Globalization;
 
-namespace SimpleJSON
+namespace TranslationCommon.SimpleJSON
 {
-    using System.Globalization;
-    using System.Collections.Generic;
     public partial class JSONNode
     {
         #region Decimal

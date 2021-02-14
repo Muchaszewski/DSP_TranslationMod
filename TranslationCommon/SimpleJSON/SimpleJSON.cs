@@ -40,9 +40,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using TranslationCommon;
 
-namespace SimpleJSON
+namespace TranslationCommon.SimpleJSON
 {
     public enum JSONNodeType
     {

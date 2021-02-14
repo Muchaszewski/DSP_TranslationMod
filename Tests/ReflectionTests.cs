@@ -2,6 +2,7 @@
 using System.Reflection;
 using NUnit.Framework;
 using TranslationCommon;
+using TranslationCommon.Translation;
 
 namespace SimpleJSONTests
 {

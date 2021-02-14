@@ -39,9 +39,10 @@
  * SOFTWARE.
  * 
  * * * * */
+
 using System;
 
-namespace SimpleJSON
+namespace TranslationCommon.SimpleJSON
 {
 #if !SimpleJSON_ExcludeBinary
     public abstract partial class JSONNode

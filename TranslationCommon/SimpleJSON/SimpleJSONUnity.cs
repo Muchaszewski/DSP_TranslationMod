@@ -41,7 +41,7 @@
 
 using UnityEngine;
 
-namespace SimpleJSON
+namespace TranslationCommon.SimpleJSON
 {
     public enum JSONContainerType { Array, Object }
 	public partial class JSONNode

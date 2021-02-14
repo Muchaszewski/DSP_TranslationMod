@@ -1,12 +1,15 @@
 ﻿using HarmonyLib;
-using TranslationCommon;
+using TranslationCommon.Translation;
 using UnityEngine;
 
-namespace DSPSimpleBuilding
+namespace DSPTranslationPlugin.GameHarmony
 {
     [HarmonyPatch(typeof(GlobalObject), nameof(GlobalObject.SaveLastLanguage))]
     public static class GlobalObject_SaveLastLanguage_Harmony
     {
+        /// <summary>
+        ///     Save last used language
+        /// </summary>
         [HarmonyPrefix]
         public static void Prefix()
         {

@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using HarmonyLib;
-using TranslationCommon;
+using TranslationCommon.Translation;
 
-namespace DSPSimpleBuilding
+namespace DSPTranslationPlugin.GameHarmony
 {
     [HarmonyPatch(typeof(UIOptionWindow), "UIToTempOption")]
     public static class UIOptionWindow_UIToTempOption_Harmony
