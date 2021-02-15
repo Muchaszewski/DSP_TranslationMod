@@ -40,16 +40,6 @@ namespace TranslationCommon.Translation
         public bool CreateAndUpdateFromPlainTextDumpUnsafe;
 
         /// <summary>
-        ///     Name of builtin font
-        /// </summary>
-        public string BuildInFontName;
-
-        /// <summary>
-        ///     Name of builtin font
-        /// </summary>
-        public string CustomFontLocation;
-        
-        /// <summary>
         ///     Settings path
         /// </summary>
         public string SettingsPath { get; set; }
