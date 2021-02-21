@@ -72,6 +72,9 @@ namespace TranslationCommon.Translation
             TranslationDictionary = CurrentLanguage?.Translation.TranslationTable.ToDictionary(proto => proto.Name);
         }
         
+        /// <summary>
+        ///     Load custom language
+        /// </summary>
         public static void LoadCurrentLanguage()
         {
             if (!IsInitialized)

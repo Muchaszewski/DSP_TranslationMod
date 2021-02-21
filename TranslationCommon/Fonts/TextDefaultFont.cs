@@ -80,25 +80,5 @@ namespace DSPTranslationPlugin.UnityHarmony
         {
             Reference.font = fontToUse;
         }
-        
-        /// <summary>
-        ///     Custom utils to get text path
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        public static string GetTextPath(Text text)
-        {
-            List<string> path = new List<string>();
-            path.Add(text.name);
-            var parent = text.transform.parent;
-            while (parent != null)
-            {
-                path.Add(parent.name);
-                parent = parent.parent;
-            }
-
-            path.Reverse();
-            return String.Join(".", path.ToArray());
-        }
     }
 }

@@ -1,12 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using HarmonyLib;
-using Mono.Cecil.Cil;
-using TranslationCommon;
-using TranslationCommon.Translation;
-using UnityEngine.UI;
-using OpCodes = System.Reflection.Emit.OpCodes;
+﻿using HarmonyLib;
 
 namespace DSPTranslationPlugin.GameHarmony.TranslationFix
 {
@@ -19,14 +11,16 @@ namespace DSPTranslationPlugin.GameHarmony.TranslationFix
             private static bool isPatched = false;
             
             /// <summary>
-            ///     Load current language after pressing "Apply" button
+            ///     Fixed "Replicating Queue" text
             /// </summary>
+            /// <param name="__instance"></param>
             [HarmonyPrefix]
             public static void Prefix(UIReplicatorWindow __instance)
             {
                 if (!isPatched)
                 {
                     var _tmp_text0 = AccessTools.Field(typeof(UIReplicatorWindow), "_tmp_text0");
+                    // 制造队列 == "Replicating Queue"
                     _tmp_text0.SetValue(__instance, "制造队列".Translate());
                     isPatched = true;
                 }

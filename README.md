@@ -7,13 +7,11 @@
  - Adds possibility to add custom languages (text only)
  - Adds (currently hidden) French language
  - Adds the possibility to change Font in game (WORK IN PROGRESS)
- 
+ - Use custom logo for custom translation
  
 # Roadmap
  - Refactor code and add documentation
- - Add support for in images that can be translated (and game logo)
  - Add support for adjusting content size of in game UI to fit new text
- - Add `*.po` file (in addition to json for easier translations)
 
 ## Installation via Mod manager 
 
@@ -86,6 +84,19 @@ You can find [translations at Crowdin](https://crowdin.com/translate/dyson-spher
   "CreateAndUpdateFromPlainTextDumpUnsafe": true    # Should create and import dump file (more below)
 }
 ```
+
+### Custom images:
+Currently in the game there are 2 images that can be changed, they look like a path - `UI/Textures/dsp-logo-en`. You can use a valid path from resources or valid URL.
+URL needs to be a direct png file. Eg:
+```
+   Internet URI -- "ImageLogo0": "https://wiki.factorio.com/images/thumb/Factorio-logo.png/461px-Factorio-logo.png",
+   Local file URI -- "ImageLogo0": "file://C:/Users/Muchaszewski/Documents/Icon.png"
+```
+
+####Specific images description:
+
+ - `ImageLogo0` and `ImageLogo1` needs to have aspect ratio that corresponds to 800x300 pixels, otherwise they will be stretched
+
 
 ### Dump file:
 Simpler file structure where only Translation value is provided.
