@@ -93,7 +93,7 @@ URL needs to be a direct png file. Eg:
    Local file URI -- "ImageLogo0": "file://C:/Users/Muchaszewski/Documents/Icon.png"
 ```
 
-####Specific images description:
+#### Specific images description:
 
  - `ImageLogo0` and `ImageLogo1` needs to have aspect ratio that corresponds to 800x300 pixels, otherwise they will be stretched
 
