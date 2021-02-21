@@ -3,8 +3,11 @@
 
 [Licence: Project is under CC Attribution 4.0](https://raw.githubusercontent.com/Muchaszewski/DSP_TranslationMod/main/LICENSE)
 
-### Features
- - Adds possibility to add custom languages (text only)
+# BREAKING CHANGE
+New translation folder location for translation: `{Game Directory}\DSPGAME_Data\Translation\{LanguageName}\...`
+
+# Features
+ - Adds possibility to add custom languages
  - Adds (currently hidden) French language
  - Adds the possibility to change Font in game (WORK IN PROGRESS)
  - Use custom logo for custom translation
@@ -19,7 +22,7 @@
 
 1. Press Install with Mod Manager at https://dsp.thunderstore.io/package/Muchaszewski/DSPTranslationPlugin/
 2. Add translations to
-   `{Mods Directory}\Muchaszewski-DSPTranslationPlugin\Translation\{LanguageName}\translation_DysonSphereProgram.json`.
+   `{Game Directory}\DSPGAME_Data\Translation\{LanguageName}\translation_DysonSphereProgram.json`.
    You can find [translations at Crowdin](https://crowdin.com/translate/dyson-sphere-program)
 6. Select new translation in Menu of the Game
 7. Enjoy
@@ -31,7 +34,7 @@
 3. Extract zip file
 4. Paste DLLs under `Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin`
 5. Add translations to
-`Dyson Sphere Program\BepInEx\plugins\DSPTranslationPlugin\Translation\{LanguageName}\translation_DysonSphereProgram.json`.
+`{Game Directory}\DSPGAME_Data\Translation\{LanguageName}\translation_DysonSphereProgram.json`.
 You can find [translations at Crowdin](https://crowdin.com/translate/dyson-sphere-program)
 
 6. Select new translation in Menu of the Game
@@ -96,22 +99,6 @@ URL needs to be a direct png file. Eg:
 #### Specific images description:
 
  - `ImageLogo0` and `ImageLogo1` needs to have aspect ratio that corresponds to 800x300 pixels, otherwise they will be stretched
-
-
-### Dump file:
-Simpler file structure where only Translation value is provided.
-Each new translation is separated by 5 dashes `-----` this can speed up the translation process. 
-Can cause error if ever game decide to change IDs or will add new ones, with JSON format there should be no such issue.
-#### IMPORTANT! Disable dump file import when sending for production!
-```
-Kliknij, aby zbudować
------
-Nie można tutaj budować
------
-Brak przedmiotu
------
-(...)
-```
 
 # Special Thanks to
 [BepInEx](https://github.com/BepInEx/BepInEx/releases) - for mod support

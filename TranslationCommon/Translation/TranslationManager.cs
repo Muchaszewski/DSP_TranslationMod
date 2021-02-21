@@ -120,7 +120,7 @@ namespace TranslationCommon.Translation
         /// <summary>
         ///     Root translation folder
         /// </summary>
-        public static string TranslationDirectory => $"{Utils.PluginPath}/Translation";
+        public static string TranslationDirectory => $"{Utils.ConfigPath}/Translation";
         
 
         /// <summary>

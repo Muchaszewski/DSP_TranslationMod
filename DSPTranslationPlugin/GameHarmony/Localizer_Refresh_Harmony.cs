@@ -26,7 +26,7 @@ namespace DSPTranslationPlugin.GameHarmony
                 }
                 else if (graphic is Image image)
                 {
-                    if (Uri.IsWellFormedUriString(__instance.translation, UriKind.RelativeOrAbsolute))
+                    if (IsUri(__instance.translation))
                     {
                         __instance.StartCoroutine(GetRequest(__instance.translation, image));
                     }
@@ -37,7 +37,7 @@ namespace DSPTranslationPlugin.GameHarmony
                 }
                 else if (graphic is RawImage rawImage)
                 {
-                    if (Uri.IsWellFormedUriString(__instance.translation, UriKind.RelativeOrAbsolute))
+                    if (IsUri(__instance.translation))
                     {
                         __instance.StartCoroutine(GetRequest(__instance.translation, rawImage));
                     }
@@ -49,6 +49,11 @@ namespace DSPTranslationPlugin.GameHarmony
             }
 
             return false;
+        }
+
+        private static bool IsUri(string translation)
+        {
+            return translation.StartsWith("http") || translation.StartsWith("file");
         }
 
         /// <summary>

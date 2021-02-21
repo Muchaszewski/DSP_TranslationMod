@@ -52,7 +52,7 @@ namespace DSPTranslationPlugin.GameHarmony
                 var type = value.GetType();
                 var result = JSON.ToJson(value, true);
                 var instanceGenericName = type.FullName;
-                TextWriter writer = new StreamWriter($"{Utils.PluginPath}/JsonDump/{instanceGenericName}.json");
+                TextWriter writer = new StreamWriter($"{Utils.ConfigPath}/JsonDump/{instanceGenericName}.json");
                 writer.Write(result);
                 writer.Flush();
                 writer.Close();

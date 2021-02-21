@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Reflection;
+using UnityEngine;
 
 namespace TranslationCommon
 {
@@ -12,5 +13,7 @@ namespace TranslationCommon
         ///  Plugin path
         /// </summary>
         public static string PluginPath = Path.GetDirectoryName(AssemblyLocation);
+
+        public static string ConfigPath = Application.dataPath;
     }
 }
