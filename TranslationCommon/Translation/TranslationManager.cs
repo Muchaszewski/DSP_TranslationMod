@@ -109,7 +109,7 @@ namespace TranslationCommon.Translation
                     container.Settings.LanguageDisplayName == SelectedLanguage);
                 CurrentLanguage = selectedContainer;
                 Localization.language = Language.enUS;
-                Localization.OnLanguageChange(Language.enUS);
+                Localization.OnLanguageChange?.Invoke(Language.enUS);
             }
         }
 
