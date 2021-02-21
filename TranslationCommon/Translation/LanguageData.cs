@@ -47,6 +47,7 @@ namespace TranslationCommon.Translation
         /// <param name="stringProto">In game translations</param>
         public LanguageData(LanguageSettings settings, ProtoSet<StringProto> stringProto)
         {
+            settings.VersionUpdate();
             TranslationTable = new List<TranslationProto>(stringProto.Length);
             var translationDelegate = GetOriginalTextDelegate<StringProto>(settings);
             for (var i = 0; i < stringProto.dataArray.Length; i++)
