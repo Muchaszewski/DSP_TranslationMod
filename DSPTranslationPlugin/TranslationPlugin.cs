@@ -6,8 +6,6 @@ using System.Reflection;
 using BepInEx;
 using DSPTranslationPlugin.UnityHarmony;
 using HarmonyLib;
-using TranslationCommon.SimpleJSON;
-using TranslationCommon.Translation;
 using UnityEngine;
 
 namespace DSPTranslationPlugin

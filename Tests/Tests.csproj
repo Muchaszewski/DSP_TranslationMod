@@ -4,8 +4,6 @@
         <TargetFramework>net472</TargetFramework>
 
         <IsPackable>false</IsPackable>
-
-        <RootNamespace>SimpleJSONTests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

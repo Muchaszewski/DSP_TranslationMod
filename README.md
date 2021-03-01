@@ -26,7 +26,6 @@ New translation folder location for translation: `{Game Directory}\DSPGAME_Data\
    You can find [translations at Crowdin](https://crowdin.com/translate/dyson-sphere-program)
 6. Select new translation in Menu of the Game
 7. Enjoy
-   (Note: Restart is not required for full effect ;) )
    
 ## Installation Manual
 1. Download and unpack [BepInEx](https://github.com/BepInEx/BepInEx/releases) into game root directory
@@ -39,7 +38,6 @@ You can find [translations at Crowdin](https://crowdin.com/translate/dyson-spher
 
 6. Select new translation in Menu of the Game
 7. Enjoy
-(Note: Restart is not required for full effect ;) )
 
 ![InGameTranslation](https://raw.githubusercontent.com/Muchaszewski/DSP_TranslationMod/main/.readme/InGameTranslation.png)
 

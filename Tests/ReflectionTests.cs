@@ -1,10 +1,7 @@
-﻿using System.Diagnostics;
-using System.Reflection;
-using NUnit.Framework;
-using TranslationCommon;
+﻿using NUnit.Framework;
 using TranslationCommon.Translation;
 
-namespace SimpleJSONTests
+namespace Tests
 {
     public class ReflectionTests
     {

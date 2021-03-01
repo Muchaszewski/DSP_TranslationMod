@@ -16,19 +16,20 @@ namespace TranslationCommon.SimpleJSON
         {
             var jsonNode = JSON.Parse(serializationStream);
             var settings = new SimpleJSONParserSettings();
-            return (T)SimpleJSONStaticParser.FromJsonNode(jsonNode, typeof(T), settings);
+            return (T) SimpleJSONStaticParser.FromJsonNode(jsonNode, typeof(T), settings);
         }
 
         public string Serialize(object graph, bool isIndented)
         {
-            var settings = new SimpleJSONParserSettings()
+            var settings = new SimpleJSONParserSettings
             {
                 IsIndented = isIndented
             };
             var jsonNode = SimpleJSONStaticParser.ToJsonNode(graph, settings);
 
             var sb = new StringBuilder();
-            jsonNode.WriteToStringBuilder(sb, 0, settings.IsIndented ? 2 : 0, settings.IsIndented ? JSONTextMode.Indent : JSONTextMode.Compact);
+            jsonNode.WriteToStringBuilder(sb, 0, settings.IsIndented ? 2 : 0,
+                settings.IsIndented ? JSONTextMode.Indent : JSONTextMode.Compact);
             return sb.ToString();
         }
     }
@@ -37,9 +38,9 @@ namespace TranslationCommon.SimpleJSON
     {
         public static SimpleJSONParserSettings Default()
         {
-            return new SimpleJSONParserSettings()
+            return new SimpleJSONParserSettings
             {
-                IsIndented = true,
+                IsIndented = true
             };
         }
 
@@ -48,64 +49,58 @@ namespace TranslationCommon.SimpleJSON
 
     public static class SimpleJSONStaticParser
     {
-        public static object FromJsonNodeImplicitSlow(JSONNode node, Type type)
-        {
-            var nodeType = typeof(JSONNode);
-            
-            var converter = nodeType.GetMethods(BindingFlags.Static | BindingFlags.Public)
-                .FirstOrDefault(info => info.Name == "op_Implicit" && info.ReturnType == type);
-            if (converter != null)
-            {
-                var result = converter.Invoke(null, new[] {(JSONNode)node});
-                return result;
-            }
-            
-            return node;
-        }
-        
+        public static Type[] AppDomainTypes;
+
         public static object FromJsonNode(JSONNode value, Type type, SimpleJSONParserSettings settings)
         {
             if (value == null)
             {
                 return null;
             }
+
             if (type == typeof(string))
             {
                 return (string) value;
             }
+
             if (type == typeof(char))
             {
                 return (char) value;
             }
+
             if (type == typeof(bool))
             {
                 return (bool) value;
             }
+
             if (typeof(IList).IsAssignableFrom(type))
             {
                 var listType = typeof(List<>);
                 var elementType = type.GetGenericArguments();
                 var constructedListType = listType.MakeGenericType(elementType);
-                var list = (IList)Activator.CreateInstance(constructedListType);
+                var list = (IList) Activator.CreateInstance(constructedListType);
                 foreach (var array in value.AsArray.Children)
                 {
                     list.Add(FromJsonNode(array, elementType[0], settings));
                 }
+
                 return list;
             }
+
             if (typeof(IDictionary).IsAssignableFrom(type))
             {
                 var dictType = typeof(Dictionary<,>);
                 var elementType = type.GetGenericArguments();
                 var constructedListType = dictType.MakeGenericType(elementType);
-                var dictionary = (IDictionary)Activator.CreateInstance(constructedListType);
+                var dictionary = (IDictionary) Activator.CreateInstance(constructedListType);
                 foreach (var dict in value)
                 {
                     dictionary.Add(
                         FromJsonNode(dict.Key, elementType[0], settings),
                         FromJsonNode(dict.Value, elementType[1], settings)
-                        );
+                    );
                 }
+
                 return dictionary;
             }
 
@@ -113,99 +108,175 @@ namespace TranslationCommon.SimpleJSON
             {
                 return (Vector2) value;
             }
+
             if (type == typeof(Vector3))
             {
                 return (Vector3) value;
             }
+
             if (type == typeof(Vector4))
             {
                 return (Vector4) value;
             }
+
             if (type == typeof(Quaternion))
             {
                 return (Quaternion) value;
             }
+
             if (type == typeof(Rect))
             {
                 return (Rect) value;
             }
+
             if (type == typeof(RectOffset))
             {
                 return (RectOffset) value;
             }
+
             if (type == typeof(Matrix4x4))
             {
                 return (Matrix4x4) value;
             }
+
             if (type == typeof(Color))
             {
                 return (Color) value;
             }
+
             if (type == typeof(Color32))
             {
                 return (Color32) value;
             }
+
             if (type == typeof(byte))
             {
                 return (byte) value;
             }
+
             if (type == typeof(sbyte))
             {
                 return (sbyte) value;
             }
+
             if (type == typeof(int))
             {
                 return (int) value;
             }
+
             if (type == typeof(uint))
             {
                 return (uint) value;
             }
+
             if (type == typeof(short))
             {
                 return (short) value;
             }
+
             if (type == typeof(ushort))
             {
                 return (ushort) value;
             }
+
             if (type == typeof(char))
             {
                 return (char) value;
             }
+
             if (type == typeof(float))
             {
                 return (float) value;
             }
+
             if (type == typeof(double))
             {
                 return (double) value;
             }
+
             if (type == typeof(decimal))
             {
                 return (decimal) value;
             }
+
             if (type == typeof(long))
             {
                 return (long) value;
             }
+
             if (type == typeof(ulong))
             {
                 return (ulong) value;
             }
-            else
+
+            var obj = CreateMatchingType(value, type, out var resultType);
+            var fields = resultType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            foreach (var fieldInfo in fields)
             {
-                var obj = Activator.CreateInstance(type);
-                var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public);
-                foreach (var fieldInfo in fields)
+                if (fieldInfo.IsPublic || fieldInfo.ContainsAttribute<SerializeField>())
                 {
+                    if (fieldInfo.ContainsAttribute<SerializeFirstAsObjectAttribute>())
+                    {
+                        fieldInfo.SetValue(obj, FromJsonNode(value, fieldInfo.FieldType, settings));
+                        return obj;
+                    }
+
                     fieldInfo.SetValue(obj, FromJsonNode(value[fieldInfo.Name], fieldInfo.FieldType, settings));
                 }
-
-                return obj;
             }
+
+            return obj;
         }
-        
+
+        private static object CreateMatchingType(JSONNode value, Type type, out Type resultType)
+        {
+            if (type.IsInterface)
+            {
+                bool ContainsAllItems<T>(IEnumerable<T> a, IEnumerable<T> b)
+                {
+                    return !b.Except(a).Any();
+                }
+
+                if (AppDomainTypes == null)
+                {
+                    var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                    var matchingTypes = new List<Type>();
+                    foreach (var assembly in assemblies)
+                    {
+                        try
+                        {
+                            matchingTypes.AddRange(assembly.GetTypes()
+                                .Where(type.IsAssignableFrom)
+                                .Where(t => !t.IsInterface && !t.IsAbstract));
+                        }
+                        catch //(ReflectionTypeLoadException e)
+                        {
+                            /*ConsoleLogger.LogDebug(assembly.FullName + " " + e.Message + "\n" + e.StackTrace + "\n" + 
+                            e.LoaderExceptions.Select(exception => exception.Message).Aggregate((x,y) => x + " " + y));*/
+                        }
+                    }
+                    AppDomainTypes = matchingTypes.ToArray();
+                }
+                
+                foreach (var matchingType in AppDomainTypes)
+                {
+                    var fields =
+                        matchingType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (ContainsAllItems(fields.Select(info => info.Name), value.GetEnumerator().ToKeyEnumerable()))
+                    {
+                        resultType = matchingType;
+                        return Activator.CreateInstance(matchingType);
+                    }
+                }
+
+                throw new KeyNotFoundException(
+                    $"No matching member was not found with signature {value.GetEnumerator().ToKeyEnumerable().Aggregate((x, y) => x + " " + y)}");
+            }
+
+            resultType = type;
+            return Activator.CreateInstance(type);
+        }
+
         public static JSONNode ToJsonNode(object value, SimpleJSONParserSettings settings)
         {
             switch (value)
@@ -243,23 +314,37 @@ namespace TranslationCommon.SimpleJSON
                     return colorValue;
                 case Color32 color32Value:
                     return color32Value;
-                
+
                 case float floatValue:
                     return new JSONNumber(floatValue.ToString("R", CultureInfo.InvariantCulture));
                 default:
                     if (JSONNumber.IsNumeric(value))
                     {
-                        return new JSONNumber(System.Convert.ToDouble(value));
+                        return new JSONNumber(Convert.ToDouble(value));
                     }
                     else
                     {
                         var jsonObject = new JSONObject();
-                        var fields = value.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
+                        var fields = value.GetType()
+                            .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
                         foreach (var fieldInfo in fields)
                         {
-                            var fieldValue = fieldInfo.GetValue(value);
-                            var jsonNode = ToJsonNode(fieldValue, settings);
-                            jsonObject.Add(fieldInfo.Name, jsonNode);
+                            if (fieldInfo.IsPublic || fieldInfo.ContainsAttribute<SerializeField>())
+                            {
+                                var fieldValue = fieldInfo.GetValue(value);
+                                if (fieldValue == default)
+                                {
+                                    continue;
+                                }
+
+                                var jsonNode = ToJsonNode(fieldValue, settings);
+                                if (fieldInfo.ContainsAttribute<SerializeFirstAsObjectAttribute>())
+                                {
+                                    return jsonNode;
+                                }
+
+                                jsonObject.Add(fieldInfo.Name, jsonNode);
+                            }
                         }
 
                         return jsonObject;
