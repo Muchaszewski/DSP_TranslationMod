@@ -9,7 +9,9 @@ namespace TranslationCommon.Fonts
         public string Path;
         public string Field;
 
-        public bool MatchChildren;
+        public List<string> ExceptPath;
+
+        public string MatchChildrenRange;
         
         public IFix Fix;
 
@@ -18,7 +20,7 @@ namespace TranslationCommon.Fonts
         {
             if (!String.IsNullOrEmpty(Path))
             {
-                return component.GetComponentsByPath<T>(Path, MatchChildren);
+                return component.GetComponentsByPath<T>(Path, ExceptPath, !String.IsNullOrEmpty(MatchChildrenRange) ? RangeValue.Parse(MatchChildrenRange) : null);
             }
             else if (!String.IsNullOrEmpty(Field))
             {
@@ -26,7 +28,7 @@ namespace TranslationCommon.Fonts
             }
             else
             {
-                return component.GetComponentsByType<T>(MatchChildren);
+                return component.GetComponentsByType<T>(!String.IsNullOrEmpty(MatchChildrenRange) ? RangeValue.Parse(MatchChildrenRange) : null);
             }
         }
     }

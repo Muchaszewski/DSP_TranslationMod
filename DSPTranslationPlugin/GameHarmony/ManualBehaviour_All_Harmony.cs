@@ -11,7 +11,7 @@ namespace DSPTranslationPlugin.GameHarmony
             new Dictionary<ManualBehaviour, UIBehaviourComponent>();
         
         [HarmonyPostfix]
-        [HarmonyPatch("_OnCreate")]
+        [HarmonyPatch("_Create")]
         public static void Postfix_OnCreate(ManualBehaviour __instance)
         {
             if (!BehaviourComponents.ContainsKey(__instance))
@@ -22,14 +22,14 @@ namespace DSPTranslationPlugin.GameHarmony
         }
 
         [HarmonyPostfix]
-        [HarmonyPatch("_OnDestroy")]
+        [HarmonyPatch("_Destroy")]
         public static void Postfix_OnDestroy(ManualBehaviour __instance)
         {
             BehaviourComponents.Remove(__instance);
         }
 
         [HarmonyPostfix]
-        [HarmonyPatch("_OnInit")]
+        [HarmonyPatch("_Init")]
         public static void Postfix_OnInit(ManualBehaviour __instance)
         {
             if (!BehaviourComponents.ContainsKey(__instance))
@@ -40,36 +40,44 @@ namespace DSPTranslationPlugin.GameHarmony
         }
 
         [HarmonyPostfix]
-        [HarmonyPatch("_OnOpen")]
+        [HarmonyPatch("_Open")]
         public static void Postfix_OnOpen(ManualBehaviour __instance)
         {
             if (!BehaviourComponents.ContainsKey(__instance))
             {
                 BehaviourComponents.Add(__instance, new UIBehaviourComponent(__instance));
             }
+
             BehaviourComponents[__instance].OnOpen();
         }
 
         [HarmonyPostfix]
-        [HarmonyPatch("_OnUpdate")]
+        [HarmonyPatch("_Update")]
         public static void Postfix_OnUpdate(ManualBehaviour __instance)
         {
-            if (!BehaviourComponents.ContainsKey(__instance))
+            if (__instance.isActiveAndEnabled)
             {
-                BehaviourComponents.Add(__instance, new UIBehaviourComponent(__instance));
+                if (!BehaviourComponents.ContainsKey(__instance))
+                {
+                    BehaviourComponents.Add(__instance, new UIBehaviourComponent(__instance));
+                }
+
+                BehaviourComponents[__instance].OnUpdate();
             }
-            BehaviourComponents[__instance].OnUpdate();
         }
         
         [HarmonyPostfix]
-        [HarmonyPatch("_OnLateUpdate")]
+        [HarmonyPatch("_LateUpdate")]
         public static void Postfix_OnLateUpdate(ManualBehaviour __instance)
         {
-            if (!BehaviourComponents.ContainsKey(__instance))
+            if (__instance.isActiveAndEnabled)
             {
-                BehaviourComponents.Add(__instance, new UIBehaviourComponent(__instance));
+                if (!BehaviourComponents.ContainsKey(__instance))
+                {
+                    BehaviourComponents.Add(__instance, new UIBehaviourComponent(__instance));
+                }
+                BehaviourComponents[__instance].OnLateUpdate();
             }
-            BehaviourComponents[__instance].OnLateUpdate();
         }
     }
 }

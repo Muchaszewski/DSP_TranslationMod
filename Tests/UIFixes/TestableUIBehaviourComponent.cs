@@ -26,13 +26,13 @@ namespace Tests.UIFixes
             throw new System.NotImplementedException();
         }
 
-        public List<T> GetComponentsByPath<T>(string path, bool matchChildren) 
+        public List<T> GetComponentsByPath<T>(string path, List<string> except, RangeValue matchChildrenLayersCount) 
             where T : UnityEngine.Component
         {
             throw new System.NotImplementedException();
         }
 
-        public List<T> GetComponentsByType<T>(bool matchAllChildren) 
+        public List<T> GetComponentsByType<T>(RangeValue matchChildrenLayersCount) 
             where T : UnityEngine.Component
         {
             throw new System.NotImplementedException();
