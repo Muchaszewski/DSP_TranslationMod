@@ -13,7 +13,7 @@ namespace TranslationCommon.Fonts
 
         public string MatchChildrenRange;
         
-        public IFix Fix;
+        public List<IFix> Fix;
 
         public List<T> GetComponents<T>(IBehaviourComponent component) 
             where T : Component

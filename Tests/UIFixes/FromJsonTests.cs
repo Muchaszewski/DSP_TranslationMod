@@ -23,8 +23,8 @@ namespace Tests.UIFixes
             });
             Assert.AreEqual(1, fixes.Count);
             Assert.AreEqual("*details.content*.*", fixes[0].Path);
-            Assert.IsInstanceOf<RectFix>(fixes[0].Fix);
-            var rectFix = (RectFix)fixes[0].Fix;
+            Assert.IsInstanceOf<RectFix>(fixes[0].Fix[0]);
+            var rectFix = (RectFix)fixes[0].Fix[0];
             Assert.AreEqual("(+75, +0)", rectFix.anchoredPosition);
         }
     }

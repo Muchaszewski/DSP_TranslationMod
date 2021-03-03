@@ -116,31 +116,31 @@ namespace TranslationCommon.Fonts
         public void OnCreate()
         {
             BehaviourCache?.GetFixes("OnCreate", this)?
-                .ForEach(fix => fix.Fix.Evaluate(fix, this));
+                .ForEach(fix => fix.Fix.ForEach(f => f.Evaluate(fix, this)));
         }
 
         public void OnInit()
         {
             BehaviourCache?.GetFixes("OnInit", this)?
-                .ForEach(fix => fix.Fix.Evaluate(fix, this));
+                .ForEach(fix => fix.Fix.ForEach(f => f.Evaluate(fix, this)));
         }
 
         public void OnOpen()
         {
             BehaviourCache?.GetFixes("OnOpen", this)?
-                .ForEach(fix => fix.Fix.Evaluate(fix, this));
+                .ForEach(fix => fix.Fix.ForEach(f => f.Evaluate(fix, this)));
         }
 
         public void OnUpdate()
         {
             BehaviourCache?.GetFixes("OnUpdate", this)?
-                .ForEach(fix => fix.Fix.Evaluate(fix, this));
+                .ForEach(fix => fix.Fix.ForEach(f => f.Evaluate(fix, this)));
         }
 
         public void OnLateUpdate()
         {
             BehaviourCache?.GetFixes("OnLateUpdate", this)?
-                .ForEach(fix => fix.Fix.Evaluate(fix, this));
+                .ForEach(fix => fix.Fix.ForEach(f => f.Evaluate(fix, this)));
         }
     }
 }

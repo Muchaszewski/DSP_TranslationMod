@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace TranslationCommon.Fonts
 {
@@ -11,7 +12,7 @@ namespace TranslationCommon.Fonts
         public string offsetMax;
         public string offsetMin;
         public string sizeDelta;
-
+        
         public void Evaluate(UIFix parent, IBehaviourComponent component)
         {
             var rectTransforms = parent.GetComponents<RectTransform>(component);
@@ -20,7 +21,7 @@ namespace TranslationCommon.Fonts
                 Fix(transform);
             }
         }
-        
+
         private void Fix(RectTransform rTrans)
         {
             if (!string.IsNullOrEmpty(pivot))

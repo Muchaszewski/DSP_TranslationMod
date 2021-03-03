@@ -12,6 +12,8 @@ namespace TranslationCommon.Fonts
             var relVal = int.Parse(relative.Substring(1));
             switch (sign)
             {
+                case '@':
+                    return relVal;
                 case '+':
                     return value + relVal;
                 case '-':
@@ -35,6 +37,8 @@ namespace TranslationCommon.Fonts
             var relVal = float.Parse(relative.Substring(1));
             switch (sign)
             {
+                case '@':
+                    return relVal;
                 case '+':
                     return value + relVal;
                 case '-':
@@ -58,6 +62,8 @@ namespace TranslationCommon.Fonts
             var relVal = double.Parse(relative.Substring(1));
             switch (sign)
             {
+                case '@':
+                    return relVal;
                 case '+':
                     return value + relVal;
                 case '-':
