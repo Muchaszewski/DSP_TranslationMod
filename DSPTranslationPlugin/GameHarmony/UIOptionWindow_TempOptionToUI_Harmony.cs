@@ -13,8 +13,6 @@ namespace DSPTranslationPlugin.GameHarmony
     public static class UIOptionWindow_TempOptionToUI_Harmony
     {
         private static int? _originalUICount;
-        private static UIComboBox _languageComboBox;
-        private static UIComboBox _tipLevelComboBox;
 
         private static string[] InGameFonts = new[]
         {
@@ -24,18 +22,6 @@ namespace DSPTranslationPlugin.GameHarmony
         [HarmonyPrefix]
         public static void Prefix(UIOptionWindow __instance)
         {
-            if (_languageComboBox == null)
-            {
-                // ReSharper disable PossibleNullReferenceException
-                _languageComboBox = (UIComboBox) __instance.GetType()
-                    .GetField("languageComp", BindingFlags.Instance | BindingFlags.NonPublic)
-                    .GetValue(__instance);
-                _tipLevelComboBox = (UIComboBox) __instance.GetType()
-                    .GetField("tipLevelComp", BindingFlags.Instance | BindingFlags.NonPublic)
-                    .GetValue(__instance);
-                // ReSharper restore PossibleNullReferenceException
-            }
-            
             AddComboBoxLanguage(__instance);
         }
         
@@ -43,27 +29,25 @@ namespace DSPTranslationPlugin.GameHarmony
         public static void Postfix(UIOptionWindow __instance)
         {
             ApplyComboBoxLanguage(__instance);
-            CreateFontCompoBox();
+            CreateFontCompoBox(__instance);
         }
 
         /// <summary>
         ///     Create option combobox with selection of font
         /// </summary>
-        private static void CreateFontCompoBox()
+        private static void CreateFontCompoBox(UIOptionWindow __instance)
         {
-            var parent = _languageComboBox.transform.parent.parent;
+            var parent = __instance.languageComp.transform.parent.parent;
             if (_originalUICount == null)
             {
                 _originalUICount = parent.childCount;
             }
 
-            var genericComboBox = _tipLevelComboBox.transform.parent;
+            var genericComboBox = __instance.tipLevelComp.transform.parent;
 
             // Needs to initialize UI
             if (_originalUICount == parent.childCount)
             {
-                var prevPosition = genericComboBox.GetComponent<RectTransform>();
-
                 foreach (var fontName in InGameFonts)
                 {
                     // Add new combobox
@@ -104,25 +88,26 @@ namespace DSPTranslationPlugin.GameHarmony
 
                     // Set Option position
                     var rectTransform = root.GetComponent<RectTransform>();
-                    rectTransform.anchoredPosition =
-                        prevPosition.anchoredPosition - new Vector2(0, prevPosition.sizeDelta.y + 5);
-                    prevPosition = rectTransform;
+                    var childCountWithoutRestore = __instance.languageComp.transform.parent.parent.childCount - 2;
+                    var position = __instance.languageComp.transform.parent.GetComponent<RectTransform>().anchoredPosition;
+                    var offset = 40;
+                    rectTransform.anchoredPosition = new Vector2(position.x, position.y - offset * childCountWithoutRestore);
                 }
             }
         }
 
         private static void AddComboBoxLanguage(UIOptionWindow __instance)
         {
-            if (!_languageComboBox.Items.Contains("(Original) Française"))
+            if (!__instance.languageComp.Items.Contains("(Original) Française"))
             {
-                _languageComboBox.Items.Add("(Original) Française");
+                __instance.languageComp.Items.Add("(Original) Française");
             }
 
             foreach (var langauge in TranslationManager.Langauges)
             {
-                if (!_languageComboBox.Items.Contains(langauge.Settings.LanguageDisplayName))
+                if (!__instance.languageComp.Items.Contains(langauge.Settings.LanguageDisplayName))
                 {
-                    _languageComboBox.Items.Add(langauge.Settings.LanguageDisplayName);
+                    __instance.languageComp.Items.Add(langauge.Settings.LanguageDisplayName);
                 }
             }
         }
@@ -135,7 +120,7 @@ namespace DSPTranslationPlugin.GameHarmony
                 {
                     if (TranslationManager.CurrentLanguage.Settings.LanguageDisplayName ==
                         TranslationManager.Langauges[i].Settings.LanguageDisplayName)
-                        _languageComboBox.itemIndex = 3 + i;
+                        __instance.languageComp.itemIndex = 3 + i;
                 }
             }
         }

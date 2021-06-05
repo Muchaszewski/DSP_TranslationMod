@@ -9,7 +9,6 @@ namespace DSPTranslationPlugin.GameHarmony.TranslationFix
     public class UIReplicatorWindow_OnUpdate_Harmony
     {
         [HarmonyPatch(typeof(UIReplicatorWindow), "_OnUpdate")]
-        [HarmonyDebug]
         public static class UIReplicatorWindow_OnUpdate_Prefix
         {
             private static bool isPatched = false;

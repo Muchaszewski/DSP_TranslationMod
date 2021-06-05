@@ -98,6 +98,17 @@ URL needs to be a direct png file. Eg:
 
  - `ImageLogo0` and `ImageLogo1` needs to have aspect ratio that corresponds to 800x300 pixels, otherwise they will be stretched
 
+# Build from source
+
+1. Download repository
+2. Edit csproj reference to point to your game location
+3. 
+
+## Run from DSPGAME.exe without steam
+   In order to start the game without steam launcher create steam_appid.txt file in root game folder with `1366540` in it.
+   (Steam launcher might be required to run in the background)
+
+
 # Special Thanks to
 [BepInEx](https://github.com/BepInEx/BepInEx/releases) - for mod support
 

@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using HarmonyLib;
 using TranslationCommon.Translation;
+using UnityEngine;
 
 namespace DSPTranslationPlugin.GameHarmony
 {
@@ -10,9 +11,10 @@ namespace DSPTranslationPlugin.GameHarmony
         [HarmonyPrefix]
         public static void Prefix(UIOptionWindow __instance)
         {
-            UIComboBox comboBox = (UIComboBox)__instance.GetType().GetField("languageComp", BindingFlags.Instance | BindingFlags.NonPublic)
-                .GetValue(__instance);
-            var item = comboBox.Items[comboBox.itemIndex];
+            UIComboBox comboBox = __instance.languageComp;
+            var item = comboBox.itemIndex != -1
+                ? comboBox.Items[comboBox.itemIndex]
+                : "English";
             TranslationManager.SelectedLanguage = item;
         }
     }
