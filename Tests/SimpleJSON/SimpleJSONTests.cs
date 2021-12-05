@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using TranslationCommon.SimpleJSON;
 using TranslationCommon.Translation;
+using Assert = NUnit.Framework.Assert;
 
 namespace Tests
 {
@@ -28,7 +29,7 @@ namespace Tests
             }
 
             var truth = JsonConvert.SerializeObject(data, Formatting.Indented);
-            Assert.AreEqual(truth, JSON.ToJson(data, true));
+            NUnit.Framework.Assert.AreEqual(truth, JSON.ToJson(data, true));
             var test =  JSON.FromJson<LanguageData>(truth);
             test.Should().BeEquivalentTo(data);
         }
@@ -39,7 +40,7 @@ namespace Tests
             ComplexDataTypes data = ComplexDataTypes.GenerateRandomValues(null, false);
 
             var truth = JsonConvert.SerializeObject(data, Formatting.Indented);
-            Assert.AreEqual(truth, JSON.ToJson(data, true));
+            NUnit.Framework.Assert.AreEqual(truth, JSON.ToJson(data, true));
             var jsonNet = JsonConvert.DeserializeObject<ComplexDataTypes>(truth);
             var test =  JSON.FromJson<ComplexDataTypes>(truth);
             jsonNet.Should().BeEquivalentTo(data);
@@ -52,7 +53,7 @@ namespace Tests
             ComplexDataTypes data = ComplexDataTypes.GenerateRandomValues(null, false);
 
             var truth = JsonConvert.SerializeObject(data, Formatting.None);
-            Assert.AreEqual(truth, JSON.ToJson(data, false));
+            NUnit.Framework.Assert.AreEqual(truth, JSON.ToJson(data, false));
             var test =  JSON.FromJson<ComplexDataTypes>(truth);
             test.Should().BeEquivalentTo(data);
         }
@@ -75,7 +76,7 @@ namespace Tests
             data.Add("Key2", "Value2");
             
             var truth = JsonConvert.SerializeObject(data, Formatting.Indented);
-            Assert.AreEqual(truth, JSON.ToJson(data, true));
+            NUnit.Framework.Assert.AreEqual(truth, JSON.ToJson(data, true));
             var jsonNet = JsonConvert.DeserializeObject<Dictionary<string, string>>(truth);
             var test =  JSON.FromJson<Dictionary<string, string>>(truth);
             jsonNet.Should().BeEquivalentTo(data);
@@ -90,7 +91,7 @@ namespace Tests
             data.Add("Test2", "test2");
             
             var result = JSON.ToJson(data, true);
-            Assert.AreEqual("{\r\n  \"Test\": \"test\",\r\n  \"Test2\": \"test2\"\r\n}", result);
+            NUnit.Framework.Assert.AreEqual("{\r\n  \"Test\": \"test\",\r\n  \"Test2\": \"test2\"\r\n}", result);
             var test = JSON.FromJson<SerializeFirstAsObjectTypes>(result);
             test.Get().Should().BeEquivalentTo(data.Get());
         }

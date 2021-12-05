@@ -20,34 +20,11 @@
       <ProjectReference Include="..\TranslationCommon\TranslationCommon.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Reference Include="0Harmony, Version=2.3.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\DSP_CustomBuildings\Libs\0Harmony.dll</HintPath>
-      </Reference>
-      <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\DSP_CustomBuildings\Libs\Assembly-CSharp.dll</HintPath>
-      </Reference>
-      <Reference Include="BepInEx, Version=5.4.5.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\DSP_CustomBuildings\Libs\BepInEx.dll</HintPath>
-      </Reference>
-      <Reference Include="BepInEx.Harmony, Version=2.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\DSP_CustomBuildings\Libs\BepInEx.Harmony.dll</HintPath>
-      </Reference>
-      <Reference Include="LDBTool, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\DSP_CustomBuildings\Libs\LDBTool.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\DSP_CustomBuildings\Libs\UnityEngine.AssetBundleModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\DSP_FontPatcher\Libs\UnityEngine.CoreModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\DSP_CustomBuildings\Libs\UnityEngine.TextRenderingModule.dll</HintPath>
-      </Reference>
-      <Reference Include="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>..\..\DSP_CustomBuildings\Libs\UnityEngine.UI.dll</HintPath>
-      </Reference>
+
+    <ItemGroup Label="Dyson Sphere Program">
+        <PackageReference Include="BepInEx.Core" Version="5.*" PrivateAssets="all" />
+        <PackageReference Include="DysonSphereProgram.GameLibs" Version="*-*" IncludeAssets="compile" PrivateAssets="all" />
+        <PackageReference Include="UnityEngine.Modules" Version="2018.4.12" IncludeAssets="compile" PrivateAssets="all" />
     </ItemGroup>
 
 </Project>

@@ -96,8 +96,8 @@ namespace Tests.UIFixes
                 Type = "UIAction",
             };
             var fixes = Cache.GetFixes("OnCreate", testable);
-            Assert.AreEqual(1, fixes.Count);
-            Assert.AreEqual("TypeTest", fixes[0].Path);
+            NUnit.Framework.Assert.AreEqual(1, fixes.Count);
+            NUnit.Framework.Assert.AreEqual("TypeTest", fixes[0].Path);
         }
         
         [Test]
@@ -109,8 +109,8 @@ namespace Tests.UIFixes
                 Type = "Type",
             };
             var fixes = Cache.GetFixes("OnCreate", testable);
-            Assert.AreEqual(1, fixes.Count);
-            Assert.AreEqual("SimplePath", fixes[0].Path);
+            NUnit.Framework.Assert.AreEqual(1, fixes.Count);
+            NUnit.Framework.Assert.AreEqual("SimplePath", fixes[0].Path);
         }
         
         [Test]
@@ -122,8 +122,8 @@ namespace Tests.UIFixes
                 Type = "Type",
             };
             var fixes = Cache.GetFixes("OnCreate", testable);
-            Assert.AreEqual(1, fixes.Count);
-            Assert.AreEqual("StartWildCardPath", fixes[0].Path);
+            NUnit.Framework.Assert.AreEqual(1, fixes.Count);
+            NUnit.Framework.Assert.AreEqual("StartWildCardPath", fixes[0].Path);
         }
         
         [Test]
@@ -135,8 +135,8 @@ namespace Tests.UIFixes
                 Type = "Type",
             };
             var fixes = Cache.GetFixes("OnCreate", testable);
-            Assert.AreEqual(1, fixes.Count);
-            Assert.AreEqual("EndWildCardPath", fixes[0].Path);
+            NUnit.Framework.Assert.AreEqual(1, fixes.Count);
+            NUnit.Framework.Assert.AreEqual("EndWildCardPath", fixes[0].Path);
         }
         
         [Test]
@@ -148,24 +148,24 @@ namespace Tests.UIFixes
                 Type = "Type",
             };
             var fixes = Cache.GetFixes("OnCreate", testable);
-            Assert.AreEqual(1, fixes.Count);
-            Assert.AreEqual("MultiWildCardPath", fixes[0].Path);
+            NUnit.Framework.Assert.AreEqual(1, fixes.Count);
+            NUnit.Framework.Assert.AreEqual("MultiWildCardPath", fixes[0].Path);
             testable = new TestableUIBehaviourComponent()
             {
                 Path = "multiMatches.rocks",
                 Type = "Type",
             };
             fixes = Cache.GetFixes("OnCreate", testable);
-            Assert.AreEqual(1, fixes.Count);
-            Assert.AreEqual("MultiWildCardPath", fixes[0].Path);
+            NUnit.Framework.Assert.AreEqual(1, fixes.Count);
+            NUnit.Framework.Assert.AreEqual("MultiWildCardPath", fixes[0].Path);
             testable = new TestableUIBehaviourComponent()
             {
                 Path = "wildcards.multiMatches",
                 Type = "Type",
             };
             fixes = Cache.GetFixes("OnCreate", testable);
-            Assert.AreEqual(1, fixes.Count);
-            Assert.AreEqual("MultiWildCardPath", fixes[0].Path);
+            NUnit.Framework.Assert.AreEqual(1, fixes.Count);
+            NUnit.Framework.Assert.AreEqual("MultiWildCardPath", fixes[0].Path);
         }
         
         [Test]
@@ -177,9 +177,9 @@ namespace Tests.UIFixes
                 Type = "UIAction",
             };
             var fixes = Cache.GetFixes("OnCreate", testable);
-            Assert.AreEqual(2, fixes.Count);
-            Assert.IsTrue(fixes.Select(x => x.Path).Contains("SimplePath"));
-            Assert.IsTrue(fixes.Select(x => x.Path).Contains("TypeTest"));
+            NUnit.Framework.Assert.AreEqual(2, fixes.Count);
+            NUnit.Framework.Assert.IsTrue(fixes.Select(x => x.Path).Contains("SimplePath"));
+            NUnit.Framework.Assert.IsTrue(fixes.Select(x => x.Path).Contains("TypeTest"));
         }
         
         [Test]
@@ -191,8 +191,8 @@ namespace Tests.UIFixes
                 Type = "Type",
             };
             var fixes = Cache.GetFixes("OnCreate", testable);
-            Assert.AreEqual(1, fixes.Count);
-            Assert.AreEqual("ComplexWildCardPath", fixes[0].Path);
+            NUnit.Framework.Assert.AreEqual(1, fixes.Count);
+            NUnit.Framework.Assert.AreEqual("ComplexWildCardPath", fixes[0].Path);
         }
     }
 }

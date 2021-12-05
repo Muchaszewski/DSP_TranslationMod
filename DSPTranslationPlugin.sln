@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DSPTranslationPlugin", "DSP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslationCommon", "TranslationCommon\TranslationCommon.csproj", "{B89B56B6-D8B9-40E7-8D8B-B2501E138B5E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{5025C0ED-5171-45CD-B631-34359778587D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{B89B56B6-D8B9-40E7-8D8B-B2501E138B5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B89B56B6-D8B9-40E7-8D8B-B2501E138B5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B89B56B6-D8B9-40E7-8D8B-B2501E138B5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5025C0ED-5171-45CD-B631-34359778587D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5025C0ED-5171-45CD-B631-34359778587D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5025C0ED-5171-45CD-B631-34359778587D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5025C0ED-5171-45CD-B631-34359778587D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

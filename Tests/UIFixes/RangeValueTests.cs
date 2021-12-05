@@ -22,11 +22,11 @@ namespace Tests.UIFixes
             var count = 0;
             while (range.TryGetNextMatch(out var match))
             {
-                Assert.AreEqual(expected, match);
+                NUnit.Framework.Assert.AreEqual(expected, match);
                 count++;
             }
 
-            Assert.AreEqual(expectedCount, count);
+            NUnit.Framework.Assert.AreEqual(expectedCount, count);
         }
         
         [TestCase("<-7", new []{-10, -9, -8}, -10)]
@@ -94,13 +94,13 @@ namespace Tests.UIFixes
             var count = 0;
             while (range.TryGetNextMatch(out var match) && count < iterations)
             {
-                Assert.AreEqual(true, expected.Contains(match), 
+                NUnit.Framework.Assert.AreEqual(true, expected.Contains(match), 
                     $"Expected [{expected.Select(x => x.ToString()).Aggregate((x,y) => $"{x}, {y}")}]\n" +
                     $"But was [{match}] at Count: {count}");
                 count++;
             }
 
-            Assert.AreEqual(expected.Length, count);
+            NUnit.Framework.Assert.AreEqual(expected.Length, count);
         }
 
     }
