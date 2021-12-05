@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TranslationCommon;
+using TranslationCommon.Translation;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,7 +35,7 @@ namespace DSPTranslationPlugin.UnityHarmony
         /// <summary>
         ///     List of all installed fonts
         /// </summary>
-        public static string[] InstalledFonts { get; }
+        public static string[] InstalledFonts { get; private set; }
         
         /// <summary>
         ///     Static constructor
@@ -41,26 +43,52 @@ namespace DSPTranslationPlugin.UnityHarmony
         static TextFontManager()
         {
             InstalledFonts = Font.GetOSInstalledFontNames();
-            LoadSettings();
+        }
+
+        public static void CheckFonts()
+        {
+            List<string> fonts = Font.GetOSInstalledFontNames().ToList();
+            if (TranslationManager.CurrentLanguage != null && TranslationManager.CurrentLanguage.Fonts != null)
+            {
+                foreach (Font font in TranslationManager.CurrentLanguage.Fonts)
+                {
+                    fonts.Add(font.name);
+                }
+            }
+
+            InstalledFonts = fonts.ToArray();
         }
 
         /// <summary>
         ///     Loads text font settings
         /// </summary>
-        private static void LoadSettings()
+        internal static void LoadSettings()
         {
             var savedFonts = PlayerPrefs.GetString(PlayerPrefsSavedFontsCode);
             var split = savedFonts.Split('|').Where(s => !String.IsNullOrEmpty(s)).ToList();
             foreach (var savedFontType in split)
             {
                 var fontName = PlayerPrefs.GetString(PlayerPrefsFontCode + savedFontType);
+                
                 if (fontName == savedFontType)
                 {
                     RestoreDefaultFont(savedFontType);
                 }
                 else
                 {
-                    var font = Font.CreateDynamicFontFromOSFont(fontName, 12);
+                    Font font;
+                    try
+                    {
+                        if (TranslationManager.CurrentLanguage == null || TranslationManager.CurrentLanguage.Fonts == null)
+                            throw new InvalidOperationException();
+
+                        font = TranslationManager.CurrentLanguage.Fonts.First(font1 => font1.name == fontName);
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        font = Font.CreateDynamicFontFromOSFont(fontName, 12);
+                    }
+
                     ApplyCustomFont(savedFontType, font);
                 }
             }

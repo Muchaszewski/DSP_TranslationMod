@@ -49,6 +49,8 @@ namespace DSPTranslationPlugin.UnityHarmony
         /// </summary>
         public void OnGetFont()
         {
+            if (DefaultFont == null || FontData == null) return;
+            
             foreach (var customFont in TextFontManager.CustomFonts)
             {
                 if (customFont.Key == DefaultFont.name || 

@@ -39,7 +39,7 @@ namespace DSPTranslationPlugin.GameHarmony
             BehaviourComponents[__instance].OnInit();
         }
 
-        [HarmonyPostfix]
+        /*[HarmonyPostfix]
         [HarmonyPatch("_Open")]
         public static void Postfix_OnOpen(ManualBehaviour __instance)
         {
@@ -78,6 +78,6 @@ namespace DSPTranslationPlugin.GameHarmony
                 }
                 BehaviourComponents[__instance].OnLateUpdate();
             }
-        }
+        }*/
     }
 }

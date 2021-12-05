@@ -1,5 +1,8 @@
 ﻿using NUnit.Framework;
 using TranslationCommon.Translation;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+
 
 namespace Tests
 {
@@ -25,7 +28,7 @@ namespace Tests
             };
 
             var translationDelegate = LanguageData.GetOriginalTextDelegate<StringProto>(settings);
-            Assert.AreEqual("ENUS", translationDelegate(val));
+            Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual("ENUS", translationDelegate(val));
         }
     }
 }
