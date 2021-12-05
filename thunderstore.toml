@@ -1,0 +1,7 @@
+[config]
+schemaVersion = "0.0.1"
+
+[publish]
+repository = "https://thunderstore.io"
+communities = ["dyson-sphere-program"]
+categories = []

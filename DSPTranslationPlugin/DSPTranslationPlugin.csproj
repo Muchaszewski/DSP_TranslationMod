@@ -27,6 +27,10 @@
         <Link>README.md</Link>
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="..\thunderstore.toml">
+        <Link>thunderstore.toml</Link>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
   <ItemGroup Label="Dyson Sphere Program">
