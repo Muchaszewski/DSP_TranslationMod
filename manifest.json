@@ -1,9 +1,9 @@
 {
     "name": "DSPTranslationPlugin",
-    "version_number": "0.4.0",
+    "version_number": "0.5.0",
     "website_url": "https://github.com/Muchaszewski/DSP_TranslationMod",
     "description": "Dyson sphere translation plugin! Translations download form crowdin https://crowdin.com/translate/dyson-sphere-program/14#",
     "dependencies": [
-        "xiaoye97-BepInEx-5.4.5"
+        "xiaoye97-BepInEx-5.4.17"
     ]
 }
