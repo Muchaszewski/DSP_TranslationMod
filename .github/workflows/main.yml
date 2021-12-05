@@ -53,7 +53,7 @@ jobs:
           artifacts: "DSPTranslationPlugin/bin/Release/net472/DSPTranslationPlugin.zip"
           token: ${{ secrets.GITHUB_TOKEN }}
 
-     - name: Publish to Thunderstore
+      - name: Publish to Thunderstore
         run: |
           powershell -Command "(New-Object Net.WebClient).DownloadFile('https://github.com/thunderstore-io/thunderstore-cli/releases/download/0.1.1/tcli-0.1.1-win-x64.zip', 'tcli.zip')"
           unzip -o tcli.zip
