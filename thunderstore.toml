@@ -1,6 +1,17 @@
 [config]
 schemaVersion = "0.0.1"
 
+[package]
+namespace = "Muchaszewski"
+name = "DSPTranslationPlugin"
+versionNumber = "0.5.2"
+description = "Dyson sphere translation plugin! Translations download form crowdin https://crowdin.com/translate/dyson-sphere-program/14#"
+websiteUrl = "https://github.com/Muchaszewski/DSP_TranslationMod"
+containsNsfwContent = false
+
+[package.dependencies]
+"xiaoye97-BepInEx" = "5.4.17"
+
 [publish]
 repository = "https://thunderstore.io"
 communities = ["dyson-sphere-program"]
