@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace DSPTranslationPlugin
 {
-    [BepInPlugin("com.muchaszewski.dsp_translationPlugin", "DSP Community Translation", "0.3.0")]
+    [BepInPlugin("com.muchaszewski.dsp_translationPlugin", "DSP Community Translation", "0.4.0")]
     public class TranslationPlugin : BaseUnityPlugin
     {
         public static MonoBehaviour StaticMonoBehaviour { get; private set; }
