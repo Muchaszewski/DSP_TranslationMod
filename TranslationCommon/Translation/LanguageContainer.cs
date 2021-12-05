@@ -49,7 +49,10 @@ namespace TranslationCommon.Translation
             {
                 Debug.Log($"Loading bundle {Settings.FontBundlePath}");
                 AssetBundle fontBundle = AssetBundle.LoadFromFile(Settings.FontBundlePath);
-                Fonts = fontBundle.LoadAllAssets<Font>();
+                if (fontBundle != null)
+                {
+                    Fonts = fontBundle.LoadAllAssets<Font>();
+                }
             }
 
             if (Settings.ImportFromLegacy)

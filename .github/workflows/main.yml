@@ -1,0 +1,53 @@
+name: .NET Publish
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+          include-prerelease: true
+
+        # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
+      - name: Setup MSBuild.exe
+        uses: microsoft/setup-msbuild@v1.0.3
+
+      - name: Setup .NET Framework
+        run: choco install netfx-4.8-devpack
+
+      - name: Setup .NET SDK
+        run: choco install dotnetcore-sdk
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build DSPTranslationPlugin/DSPTranslationPlugin.csproj -c Release
+
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          filename: 'DSPTranslationPlugin.zip'
+          directory: 'DSPTranslationPlugin/bin/Release/net472/'
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "DSPTranslationPlugin/bin/Release/net472/DSPTranslationPlugin.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
