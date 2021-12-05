@@ -43,7 +43,9 @@ namespace TranslationCommon.Translation
         ///     Settings path
         /// </summary>
         public string SettingsPath { get; set; }
-
+        
+        public string FontBundlePath { get; set; }
+        
         /// <summary>
         ///     Settings directory
         /// </summary>

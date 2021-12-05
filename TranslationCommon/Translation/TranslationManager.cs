@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using DSPTranslationPlugin.UnityHarmony;
 using TranslationCommon.SimpleJSON;
 using UnityEngine;
 
@@ -108,8 +109,12 @@ namespace TranslationCommon.Translation
                 var selectedContainer = Langauges.FirstOrDefault(container =>
                     container.Settings.LanguageDisplayName == SelectedLanguage);
                 CurrentLanguage = selectedContainer;
+                TextFontManager.CheckFonts();
+                TextFontManager.LoadSettings();
                 Localization.language = Language.enUS;
                 Localization.OnLanguageChange?.Invoke(Language.enUS);
+                
+                
             }
         }
 
@@ -117,11 +122,13 @@ namespace TranslationCommon.Translation
         ///     Translation folder settings file name
         /// </summary>
         public const string SettingsJsonFileName = "settings.json";
+        
+        public const string FondBundleFileName = "font_bundle";
         /// <summary>
         ///     Root translation folder
         /// </summary>
         public static string TranslationDirectory => $"{Utils.ConfigPath}/Translation";
-        
+         
 
         /// <summary>
         ///     Gets all languages form the translation folder 
@@ -154,9 +161,11 @@ namespace TranslationCommon.Translation
             LanguageSettings settings = null;
             
             string translationMain = null;
+            string bundlePath = "";
             foreach (var file in  Directory.GetFiles(directory))
             {
                 if (file.Contains(SettingsJsonFileName)) translationMain = file;
+                if (file.Contains(FondBundleFileName)) bundlePath = file;
             }
             
             if (translationMain == null)
@@ -170,6 +179,7 @@ namespace TranslationCommon.Translation
             else
             {
                 settings = JSON.FromJson<LanguageSettings>(File.ReadAllText(translationMain));
+                settings.FontBundlePath = bundlePath;
                 settings.VersionUpdate();
                 // Overwrite file with potential new settings
                 File.WriteAllText(Path.Combine(directory, SettingsJsonFileName), JSON.ToJson(settings, true));

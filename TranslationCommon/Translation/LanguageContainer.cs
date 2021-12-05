@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using TranslationCommon.SimpleJSON;
+using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace TranslationCommon.Translation
 {
@@ -22,6 +24,8 @@ namespace TranslationCommon.Translation
         ///     Translation data
         /// </summary>
         public LanguageData Translation;
+        
+        public Font[] Fonts;
 
         /// <summary>
         ///     Constructor of the container with settings alread loaded into memory
@@ -40,6 +44,13 @@ namespace TranslationCommon.Translation
         {
             var translationFilePath = Path.Combine(Settings.SettingsDirectory, LanguageData.TranslationFileName);
             PlainTextDump(template, translationFilePath);
+
+            if (Fonts == null)
+            {
+                Debug.Log($"Loading bundle {Settings.FontBundlePath}");
+                AssetBundle fontBundle = AssetBundle.LoadFromFile(Settings.FontBundlePath);
+                Fonts = fontBundle.LoadAllAssets<Font>();
+            }
 
             if (Settings.ImportFromLegacy)
             {

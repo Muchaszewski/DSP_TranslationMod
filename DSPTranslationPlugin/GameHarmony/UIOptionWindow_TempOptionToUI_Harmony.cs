@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using DSPTranslationPlugin.UnityHarmony;
 using HarmonyLib;
@@ -6,6 +8,7 @@ using TranslationCommon;
 using TranslationCommon.Translation;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace DSPTranslationPlugin.GameHarmony
 {
@@ -14,17 +17,19 @@ namespace DSPTranslationPlugin.GameHarmony
     {
         private static int? _originalUICount;
 
+        private static UIComboBox[] languageComboBoxes;
+
         private static string[] InGameFonts = new[]
         {
             "Default",
         };
-        
+
         [HarmonyPrefix]
         public static void Prefix(UIOptionWindow __instance)
         {
             AddComboBoxLanguage(__instance);
         }
-        
+
         [HarmonyPostfix]
         public static void Postfix(UIOptionWindow __instance)
         {
@@ -45,11 +50,17 @@ namespace DSPTranslationPlugin.GameHarmony
 
             var genericComboBox = __instance.tipLevelComp.transform.parent;
 
+            if (languageComboBoxes == null)
+                languageComboBoxes = new UIComboBox[InGameFonts.Length];
+
             // Needs to initialize UI
             if (_originalUICount == parent.childCount)
             {
-                foreach (var fontName in InGameFonts)
+                Localization.OnLanguageChange += ReloadFontsComboBox;
+                
+                for (int i = 0; i < InGameFonts.Length; i++)
                 {
+                    var fontName = InGameFonts[i];
                     // Add new combobox
                     var root = Object.Instantiate(genericComboBox,
                         genericComboBox.parent);
@@ -58,30 +69,44 @@ namespace DSPTranslationPlugin.GameHarmony
                     Object.Destroy(root.GetComponent<Localizer>());
                     root.GetComponent<Text>().text = $"Font - {fontName}";
 
-                    var newComboBox = root.GetComponentInChildren<UIComboBox>();
-                    newComboBox.Items.Clear();
-                    newComboBox.Items.Add(fontName);
+                    languageComboBoxes[i] = root.GetComponentInChildren<UIComboBox>();
+                    UIComboBox languageComboBox = languageComboBoxes[i];
+                    languageComboBox.Items.Clear();
+                    languageComboBox.Items.Add(fontName);
                     foreach (var installedFont in TextFontManager.InstalledFonts)
                     {
-                        newComboBox.Items.Add(installedFont);
+                        languageComboBox.Items.Add(installedFont);
                     }
 
-                    newComboBox.text = fontName;
+
+                    languageComboBox.text = fontName;
 
                     var settingsIndex = TextFontManager.GetSettingIndex(fontName);
                     ConsoleLogger.LogWarning("TextFontManager.GetSettingIndex " + settingsIndex);
-                    newComboBox.itemIndex = settingsIndex;
+                    languageComboBox.itemIndex = settingsIndex;
 
-                    newComboBox.onItemIndexChange.AddListener(() =>
+                    languageComboBox.onItemIndexChange.AddListener(() =>
                     {
-                        var selectedFontName = newComboBox.Items[newComboBox.itemIndex];
+                        var selectedFontName = languageComboBox.Items[languageComboBox.itemIndex];
                         if (selectedFontName == fontName)
                         {
                             TextFontManager.RestoreDefaultFont(fontName);
                         }
                         else
                         {
-                            var font = Font.CreateDynamicFontFromOSFont(selectedFontName, 12);
+                            Font font;
+                            try
+                            {
+                                if (TranslationManager.CurrentLanguage == null || TranslationManager.CurrentLanguage.Fonts == null)
+                                    throw new InvalidOperationException();
+
+                                font = TranslationManager.CurrentLanguage.Fonts.First(font1 => font1.name == selectedFontName);
+                            }
+                            catch (InvalidOperationException)
+                            {
+                                font = Font.CreateDynamicFontFromOSFont(selectedFontName, 12);
+                            }
+
                             TextFontManager.ApplyCustomFont(fontName, font);
                         }
                     });
@@ -92,6 +117,25 @@ namespace DSPTranslationPlugin.GameHarmony
                     var position = __instance.languageComp.transform.parent.GetComponent<RectTransform>().anchoredPosition;
                     var offset = 40;
                     rectTransform.anchoredPosition = new Vector2(position.x, position.y - offset * childCountWithoutRestore);
+                }
+            }
+        }
+
+        public static void ReloadFontsComboBox(Language lang)
+        {
+            for (int index = 0; index < InGameFonts.Length; index++)
+            {
+                UIComboBox languageComboBox = languageComboBoxes[index];
+                if (languageComboBox == null)
+                {
+                    return;
+                }
+                var fontName = InGameFonts[index];
+                languageComboBox.Items.Clear();
+                languageComboBox.Items.Add(fontName);
+                foreach (var installedFont in TextFontManager.InstalledFonts)
+                {
+                    languageComboBox.Items.Add(installedFont);
                 }
             }
         }
